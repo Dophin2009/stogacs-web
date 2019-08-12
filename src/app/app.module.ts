@@ -27,15 +27,9 @@ import { appReducers } from "./store/reducers/app.reducers";
   imports: [
     AppRoutingModule,
     BrowserModule,
-    EffectsModule.forRoot([AuthEffects]),
     FormsModule,
     HttpClientModule,
-    RouterModule.forRoot([
-      { path: "login", component: LoginComponent },
-      { path: "register", component: SignUpComponent },
-      { path: "", component: LandingComponent },
-      { path: "**", redirectTo: "/" }
-    ]),
+    EffectsModule.forRoot([AuthEffects]),
     StoreModule.forRoot(appReducers),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
   ],
