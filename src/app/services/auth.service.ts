@@ -1,4 +1,5 @@
 import { Observable } from "rxjs";
+import { tap } from "rxjs/operators";
 
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
@@ -8,17 +9,19 @@ import {
 } from "../models/auth.interface";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class AuthService {
-
   private readonly BASE_URL = "http://localhost:8080/user/auth";
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) {}
 
   register(registration: IRegistration): Observable<IRegistrationResponse> {
     const endpoint = `${this.BASE_URL}/register`;
-    const response =  this.httpClient.post<IRegistrationResponse>(endpoint, registration);
+    const response = this.httpClient.post<IRegistrationResponse>(
+      endpoint,
+      registration
+    );
     return response;
   }
 
@@ -26,12 +29,18 @@ export class AuthService {
     const endpoint = `${this.BASE_URL}/token`;
     const base64 = window.btoa(`${auth.username}:${auth.password}`);
 
-    const response = this.httpClient.post<IAuthToken>(endpoint, null, {
-      headers: {
-        "Authorization": `Basic ${base64}`
-      }
-    });
+    const response = this.httpClient
+      .post<IAuthToken>(endpoint, null, {
+        headers: {
+          Authorization: `Basic ${base64}`
+        }
+      })
+      .pipe(
+        tap((token: IAuthToken) => {
+          localStorage.setItem("token", token.token);
+        })
+      );
+
     return response;
   }
-
 }
