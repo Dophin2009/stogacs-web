@@ -1,5 +1,5 @@
 import { of } from "rxjs";
-import { catchError, map, switchMap, tap } from "rxjs/operators";
+import { catchError, map, switchMap } from "rxjs/operators";
 
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";

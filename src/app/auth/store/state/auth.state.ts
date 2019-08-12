@@ -1,4 +1,4 @@
-import { IAuthToken } from "src/app/models/auth.interface";
+import { IAuthToken } from "src/app/auth/models/auth.interface";
 
 export interface IAuthState {
   authenticated: boolean;
