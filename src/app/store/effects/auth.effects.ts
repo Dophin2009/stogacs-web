@@ -39,19 +39,10 @@ export class AuthEffects {
     ofType(EAuthActions.Register),
     map((action: Register) => action.payload),
     switchMap((payload: IRegistration) => {
-      console.log("Registering!")
       return this._authService.register(payload).pipe(
         map((response: IRegistrationResponse) => new RegisterSuccess(response)),
         catchError(error => of(new RegisterFailure("Registration failed")))
       );
-    })
-  );
-
-  @Effect()
-  loginSuccess$ = this._actions$.pipe(
-    ofType(EAuthActions.LoginSuccess),
-    tap((authToken: IAuthToken) => {
-      localStorage.setItem("token", authToken.token);
     })
   );
 }
