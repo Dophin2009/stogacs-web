@@ -1,5 +1,6 @@
+import { storageSync } from "@larscom/ngrx-store-storagesync";
 import { routerReducer } from "@ngrx/router-store";
-import { ActionReducerMap } from "@ngrx/store";
+import { ActionReducer, ActionReducerMap } from "@ngrx/store";
 
 import { IAppState } from "../state/app.state";
 import { authReducers } from "./auth.reducers";
@@ -10,3 +11,12 @@ export const appReducers: ActionReducerMap<IAppState> = {
   auth: authReducers,
   user: userReducers
 };
+
+export function storageSyncReducer(
+  reducer: ActionReducer<any>
+): ActionReducer<any> {
+  return storageSync<IAppState>({
+    features: [{ stateKey: "auth" }],
+    storage: window.localStorage
+  })(reducer);
+}

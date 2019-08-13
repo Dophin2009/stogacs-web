@@ -4,9 +4,8 @@ import { HttpClientModule } from "@angular/common/http";
 import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { BrowserModule } from "@angular/platform-browser";
-import { RouterModule } from "@angular/router";
 import { EffectsModule } from "@ngrx/effects";
-import { StoreModule } from "@ngrx/store";
+import { MetaReducer, StoreModule } from "@ngrx/store";
 import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 
 import { AppRoutingModule } from "./app-routing.module";
@@ -15,22 +14,25 @@ import { LandingComponent } from "./components/landing/landing.component";
 import { LoginComponent } from "./components/login/login.component";
 import { SignUpComponent } from "./components/sign-up/sign-up.component";
 import { AuthEffects } from "./store/effects/auth.effects";
-import { appReducers } from "./store/reducers/app.reducers";
+import { UserEffects } from "./store/effects/user.effects";
+import { appReducers, storageSyncReducer } from "./store/reducers/app.reducers";
+
+const metaReducers: Array<MetaReducer<any, any>> = [storageSyncReducer];
 
 @NgModule({
   declarations: [
     AppComponent,
+    LandingComponent,
     LoginComponent,
     SignUpComponent,
-    LandingComponent
   ],
   imports: [
     AppRoutingModule,
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    EffectsModule.forRoot([AuthEffects]),
-    StoreModule.forRoot(appReducers),
+    EffectsModule.forRoot([AuthEffects, UserEffects]),
+    StoreModule.forRoot(appReducers, { metaReducers }),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
   ],
   providers: [],

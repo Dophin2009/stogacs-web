@@ -3,7 +3,13 @@
     <h1>StogaCS Web</h1>
     <hr />
     <br />
-    <a [routerLink]="['/login']" class="btn btn-primary">Log in</a>
-    <a [routerLink]="['/register']" class="btn btn-primary">Sign up</a>
+    <div *ngIf="(authToken | async) == null; then welcome; else dashboard"></div>
+    <ng-template #welcome>
+      <a [routerLink]="['/login']" class="btn btn-primary">Log in</a>
+      <a [routerLink]="['/register']" class="btn btn-primary">Sign up</a>
+    </ng-template>
+    <ng-template #dashboard>
+      <p>{{(user | async).name}}</p>
+    </ng-template>
   </div>
 </div>

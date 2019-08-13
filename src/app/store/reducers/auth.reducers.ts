@@ -12,14 +12,12 @@ export const authReducers = (
     case EAuthActions.LoginSuccess: {
       return {
         ...state,
-        authenticated: true,
-        token: (action.payload as IAuthToken).token
+        token: action.payload as IAuthToken
       };
     }
     case EAuthActions.LoginFailure: {
       return {
         ...state,
-        authenticated: false
       };
     }
     case EAuthActions.RegisterSuccess: {

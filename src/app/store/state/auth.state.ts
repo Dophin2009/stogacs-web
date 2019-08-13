@@ -1,11 +1,9 @@
 import { IAuthToken } from "src/app/models/auth.interface";
 
 export interface IAuthState {
-  authenticated: boolean;
-  token: string;
+  token: IAuthToken
 }
 
 export const initialAuthState: IAuthState = {
-  authenticated: false,
   token: null
 }

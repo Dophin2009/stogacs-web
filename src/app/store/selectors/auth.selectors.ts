@@ -5,5 +5,5 @@ import { IAuthState } from "../state/auth.state";
 
 export const selectAuth = createSelector(
   (state: IAppState) => state.auth,
-  (state: IAuthState) => state
+  (state: IAuthState) => state.token
 );

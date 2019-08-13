@@ -1,4 +1,5 @@
 export interface IAuthToken {
+  email: string,
   token: string,
   expirationDate: string
 }

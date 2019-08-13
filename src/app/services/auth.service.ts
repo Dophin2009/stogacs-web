@@ -1,5 +1,5 @@
 import { Observable } from "rxjs";
-import { tap } from "rxjs/operators";
+import { map, tap } from "rxjs/operators";
 
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
@@ -36,10 +36,16 @@ export class AuthService {
         }
       })
       .pipe(
-        tap((token: IAuthToken) => {
-          localStorage.setItem("token", token.token);
+        map((token: IAuthToken) => {
+          token.email = auth.username;
+          return token;
         })
       );
+    // .pipe(
+    //   tap((token: IAuthToken) => {
+    //     localStorage.setItem("token", token.token);
+    //   })
+    // );
 
     return response;
   }
