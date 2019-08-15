@@ -1,4 +1,5 @@
 import { Observable } from "rxjs";
+import { ModalService } from "src/app/modal/modal.service";
 import { IAuthToken } from "src/app/models/auth.interface";
 import { IUser } from "src/app/models/user.interface";
 import { selectUser } from "src/app/store/selectors/user.selectors";
@@ -19,7 +20,10 @@ export class LandingComponent implements OnInit {
   authToken: Observable<IAuthToken> = this._store.select(selectAuth);
   user: Observable<IUser> = this._store.select(selectUser);
 
-  constructor(private _store: Store<IAppState>) {}
+  constructor(
+    private _store: Store<IAppState>,
+    private _modalService: ModalService
+  ) {}
 
   ngOnInit() {
     this.authToken.subscribe((token: IAuthToken) => {
@@ -29,5 +33,13 @@ export class LandingComponent implements OnInit {
         );
       }
     });
+  }
+
+  openModal(id: string) {
+    this._modalService.open(id);
+  }
+
+  closeModal(id: string) {
+    this._modalService.close(id);
   }
 }

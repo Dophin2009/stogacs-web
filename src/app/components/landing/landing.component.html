@@ -1,12 +1,21 @@
 <div class="row">
-  <div class="col-md-4">
-    <h1>StogaCS Web</h1>
+  <div class="col-md-5">
+    <h1>Conestoga Computer Science Club</h1>
     <hr />
     <br />
     <div *ngIf="(authToken | async) == null; then welcome; else dashboard"></div>
     <ng-template #welcome>
-      <a [routerLink]="['/login']" class="btn btn-primary">Log in</a>
-      <a [routerLink]="['/register']" class="btn btn-primary">Sign up</a>
+      <button (click)="openModal('login-modal')" class="btn btn-primary">Log in</button>
+      <button (click)="openModal('register-modal')" class="btn btn-primary">Sign up</button>
+
+      <jw-modal id="login-modal">
+        <app-login></app-login>
+      </jw-modal>
+
+      <jw-modal id="register-modal">
+        <app-sign-up></app-sign-up>
+      </jw-modal>
+
     </ng-template>
     <ng-template #dashboard>
       <p>{{(user | async).name}}</p>
