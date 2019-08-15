@@ -7,6 +7,7 @@ import { Actions, Effect, ofType } from "@ngrx/effects";
 import { IBasicAuth } from "../../models/auth.interface";
 import { IUser } from "../../models/user.interface";
 import { UserService } from "../../services/user.service";
+import { LogoutAction } from "../actions/auth.actions";
 import {
   EUserActions, GetUserAction, GetUserFailureAction, GetUserSuccessAction
 } from "../actions/user.actions";
@@ -27,5 +28,11 @@ export class UserEffects {
         )
       );
     })
+  );
+
+  @Effect()
+  getUserFailure$ = this._actions$.pipe(
+    ofType(EUserActions.GetUserFailure),
+    map((action: GetUserFailureAction) => new LogoutAction())
   );
 }

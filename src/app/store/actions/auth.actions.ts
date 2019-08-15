@@ -8,6 +8,7 @@ export enum EAuthActions {
   Login = "[Auth] Login",
   LoginSuccess = "[Auth] Login Success",
   LoginFailure = "[Auth] Login Failure",
+  Logout = "[Auth] Logout",
   Register = "[Auth] Register",
   RegisterSuccess = "[Auth] Register Success",
   RegisterFailure = "[Auth] Register Failure"
@@ -26,6 +27,11 @@ export class LoginSuccess implements Action {
 export class LoginFailure implements Action {
   type = EAuthActions.LoginFailure;
   constructor(public payload: string) {}
+}
+
+export class LogoutAction implements Action {
+  type = EAuthActions.Logout;
+  constructor() {}
 }
 
 export class Register implements Action {

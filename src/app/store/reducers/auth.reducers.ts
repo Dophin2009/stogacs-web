@@ -1,5 +1,4 @@
 import { IAuthToken } from "src/app/models/auth.interface";
-import { IUser } from "src/app/models/user.interface";
 
 import { AuthActions, EAuthActions } from "../actions/auth.actions";
 import { IAuthState, initialAuthState } from "../state/auth.state";
@@ -17,7 +16,13 @@ export const authReducers = (
     }
     case EAuthActions.LoginFailure: {
       return {
+        ...state
+      };
+    }
+    case EAuthActions.Logout: {
+      return {
         ...state,
+        token: null
       };
     }
     case EAuthActions.RegisterSuccess: {
