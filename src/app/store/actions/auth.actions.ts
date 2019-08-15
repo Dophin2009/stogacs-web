@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from "@angular/common/http";
 import { Action } from "@ngrx/store";
 
 import {
@@ -26,7 +27,7 @@ export class LoginSuccess implements Action {
 
 export class LoginFailure implements Action {
   type = EAuthActions.LoginFailure;
-  constructor(public payload: string) {}
+  constructor(public payload: HttpErrorResponse) {}
 }
 
 export class LogoutAction implements Action {
@@ -46,7 +47,7 @@ export class RegisterSuccess implements Action {
 
 export class RegisterFailure implements Action {
   type = EAuthActions.RegisterFailure;
-  constructor(public payload: string) {}
+  constructor(public payload: HttpErrorResponse) {}
 }
 
 export type AuthActions = Login | LoginSuccess | LoginFailure | Register | RegisterSuccess | RegisterFailure;

@@ -1,6 +1,7 @@
 import { of } from "rxjs";
 import { catchError, map, switchMap } from "rxjs/operators";
 
+import { HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Actions, Effect, ofType } from "@ngrx/effects";
 
@@ -24,7 +25,7 @@ export class UserEffects {
       return this._userService.getUser(payload).pipe(
         map((response: IUser) => new GetUserSuccessAction(response)),
         catchError(error =>
-          of(new GetUserFailureAction("Failed to fetch user data"))
+          of(new GetUserFailureAction(error))
         )
       );
     })
@@ -33,6 +34,12 @@ export class UserEffects {
   @Effect()
   getUserFailure$ = this._actions$.pipe(
     ofType(EUserActions.GetUserFailure),
-    map((action: GetUserFailureAction) => new LogoutAction())
+    map((action: GetUserFailureAction) => action.payload),
+    switchMap((payload: HttpErrorResponse) => {
+      if (payload.status === 401) {
+        return of(new LogoutAction());
+      }
+      return of();
+    })
   );
 }

@@ -29,7 +29,7 @@ export class AuthEffects {
     switchMap((payload: IBasicAuth) =>
       this._authService.login(payload).pipe(
         map((token: IAuthToken) => new LoginSuccess(token)),
-        catchError(error => of(new LoginFailure("Login failed")))
+        catchError(error => of(new LoginFailure(error)))
       )
     )
   );
@@ -41,7 +41,7 @@ export class AuthEffects {
     switchMap((payload: IRegistration) => {
       return this._authService.register(payload).pipe(
         map((response: IRegistrationResponse) => new RegisterSuccess(response)),
-        catchError(error => of(new RegisterFailure("Registration failed")))
+        catchError(error => of(new RegisterFailure(error)))
       );
     })
   );

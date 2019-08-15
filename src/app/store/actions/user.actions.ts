@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from "@angular/common/http";
 import { Action } from "@ngrx/store";
 
 import { IBasicAuth } from "../../models/auth.interface";
@@ -21,7 +22,7 @@ export class GetUserSuccessAction implements Action {
 
 export class GetUserFailureAction implements Action {
   type = EUserActions.GetUserFailure;
-  constructor(public payload: string) {}
+  constructor(public payload: HttpErrorResponse) {}
 }
 
 export type UserActions = GetUserAction | GetUserSuccessAction | GetUserFailureAction;
