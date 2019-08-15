@@ -1,5 +1,4 @@
-import { IUser } from "src/app/models/user.interface";
-
+import { IUser } from "../../models/user.interface";
 import { EUserActions, UserActions } from "../actions/user.actions";
 import { initialUserState, IUserState } from "../state/user.state";
 
@@ -12,7 +11,13 @@ export const userReducers = (
       return {
         ...state,
         user: action.payload as IUser
-      }
+      };
+    }
+    case EUserActions.GetUserFailure: {
+      return {
+        ...state,
+        user: null
+      };
     }
     default: {
       return state;

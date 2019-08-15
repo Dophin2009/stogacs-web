@@ -1,5 +1,5 @@
 import { of } from "rxjs";
-import { catchError, map, switchMap, tap } from "rxjs/operators";
+import { catchError, map, switchMap, take, tap } from "rxjs/operators";
 
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
@@ -45,4 +45,14 @@ export class AuthEffects {
       );
     })
   );
+
+  @Effect()
+  reloadRoot$ = this._actions$.pipe(
+    ofType(EAuthActions.LoginSuccess, EAuthActions.Logout),
+    take(1),
+    tap(() => {
+      this._router.navigateByUrl("/");
+    })
+  );
+  
 }

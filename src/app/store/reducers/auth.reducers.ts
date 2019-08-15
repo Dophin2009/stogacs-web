@@ -1,5 +1,4 @@
-import { IAuthToken } from "src/app/models/auth.interface";
-
+import { IAuthToken } from "../../models/auth.interface";
 import { AuthActions, EAuthActions } from "../actions/auth.actions";
 import { IAuthState, initialAuthState } from "../state/auth.state";
 

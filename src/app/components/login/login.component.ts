@@ -1,9 +1,8 @@
-import { IAuthToken, IBasicAuth } from "src/app/models/auth.interface";
-import { Login } from "src/app/store/actions/auth.actions";
-
 import { Component, OnInit } from "@angular/core";
 import { Store } from "@ngrx/store";
 
+import { IAuthToken, IBasicAuth } from "../../models/auth.interface";
+import { Login } from "../../store/actions/auth.actions";
 import { IAppState } from "../../store/state/app.state";
 
 @Component({

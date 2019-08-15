@@ -1,9 +1,9 @@
-import { IAuthToken } from "src/app/models/auth.interface";
+import { IAuthToken } from "../../models/auth.interface";
 
 export interface IAuthState {
-  token: IAuthToken
+  token: IAuthToken;
 }
 
 export const initialAuthState: IAuthState = {
   token: null
-}
+};

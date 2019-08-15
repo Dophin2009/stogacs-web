@@ -1,8 +1,9 @@
 import { of } from "rxjs";
-import { catchError, map, switchMap } from "rxjs/operators";
+import { catchError, map, switchMap, take, tap } from "rxjs/operators";
 
 import { HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { Router } from "@angular/router";
 import { Actions, Effect, ofType } from "@ngrx/effects";
 
 import { IBasicAuth } from "../../models/auth.interface";
@@ -15,7 +16,11 @@ import {
 
 @Injectable()
 export class UserEffects {
-  constructor(private _userService: UserService, private _actions$: Actions) {}
+  constructor(
+    private _userService: UserService,
+    private _actions$: Actions,
+    private _router: Router
+  ) {}
 
   @Effect()
   getUser$ = this._actions$.pipe(
@@ -24,9 +29,7 @@ export class UserEffects {
     switchMap((payload: IBasicAuth) => {
       return this._userService.getUser(payload).pipe(
         map((response: IUser) => new GetUserSuccessAction(response)),
-        catchError(error =>
-          of(new GetUserFailureAction(error))
-        )
+        catchError(error => of(new GetUserFailureAction(error)))
       );
     })
   );
