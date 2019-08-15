@@ -1,5 +1,5 @@
-import { IAuthToken, IBasicAuth } from "src/app/auth/models/auth.interface";
-import { Login } from "src/app/auth/store/actions/auth.actions";
+import { IAuthToken, IBasicAuth } from "src/app/models/auth.interface";
+import { Login } from "src/app/store/actions/auth.actions";
 
 import { Component, OnInit } from "@angular/core";
 import { Store } from "@ngrx/store";
