@@ -1,14 +1,15 @@
 import { Observable } from "rxjs";
-import { ModalService } from "src/app/modal/modal.service";
-import { IAuthToken } from "src/app/models/auth.interface";
-import { IUser } from "src/app/models/user.interface";
-import { selectUser } from "src/app/store/selectors/user.selectors";
 
 import { Component, OnInit } from "@angular/core";
 import { Store } from "@ngrx/store";
 
+import { ModalService } from "../../components/modal/modal.service";
+import { IAuthToken } from "../../models/auth.interface";
+import { IUser } from "../../models/user.interface";
+import { LogoutAction } from "../../store/actions/auth.actions";
 import { GetUserAction } from "../../store/actions/user.actions";
 import { selectAuth } from "../../store/selectors/auth.selectors";
+import { selectUser } from "../../store/selectors/user.selectors";
 import { IAppState } from "../../store/state/app.state";
 
 @Component({
@@ -41,5 +42,9 @@ export class LandingComponent implements OnInit {
 
   closeModal(id: string) {
     this._modalService.close(id);
+  }
+
+  dispatchLogout() {
+    this._store.dispatch(new LogoutAction());
   }
 }

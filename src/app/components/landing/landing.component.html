@@ -3,10 +3,20 @@
     <h1>Conestoga Computer Science Club</h1>
     <hr />
     <br />
-    <div *ngIf="(authToken | async) == null; then welcome; else dashboard"></div>
+    <div
+      *ngIf="
+        (authToken | async) == null && (user | async) == null;
+        then welcome;
+        else dashboard
+      "
+    ></div>
     <ng-template #welcome>
-      <button (click)="openModal('login-modal')" class="btn btn-primary">Log in</button>
-      <button (click)="openModal('register-modal')" class="btn btn-primary">Sign up</button>
+      <button (click)="openModal('login-modal')" class="btn btn-primary">
+        Log in
+      </button>
+      <button (click)="openModal('register-modal')" class="btn btn-primary">
+        Sign up
+      </button>
 
       <jw-modal id="login-modal">
         <app-login></app-login>
@@ -15,10 +25,10 @@
       <jw-modal id="register-modal">
         <app-sign-up></app-sign-up>
       </jw-modal>
-
     </ng-template>
     <ng-template #dashboard>
-      <p>{{(user | async).name}}</p>
+      <button (click)="dispatchLogout()" class="btn btn-primary">Logout</button>
+      <p>{{ (user | async).name }}</p>
     </ng-template>
   </div>
 </div>
