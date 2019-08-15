@@ -15,7 +15,7 @@ import { IAppState } from "../../store/state/app.state";
 @Component({
   selector: "app-landing",
   templateUrl: "./landing.component.html",
-  styleUrls: ["./landing.component.scss"]
+  styleUrls: ["./landing.component.scss", "../shared.styles.scss"]
 })
 export class LandingComponent implements OnInit {
   authToken: Observable<IAuthToken> = this._store.select(selectAuth);

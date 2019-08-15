@@ -8,7 +8,7 @@ import { IAppState } from "../../store/state/app.state";
 @Component({
   selector: "app-login",
   templateUrl: "./login.component.html",
-  styleUrls: ["./login.component.scss"]
+  styleUrls: ["./login.component.scss", "../shared.styles.scss"]
 })
 export class LoginComponent implements OnInit {
   email: string;

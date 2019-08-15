@@ -10,7 +10,7 @@ import { IAppState } from "../../store/state/app.state";
 @Component({
   selector: "app-sign-up",
   templateUrl: "./sign-up.component.html",
-  styleUrls: ["./sign-up.component.scss"]
+  styleUrls: ["./sign-up.component.scss", "../shared.styles.scss"]
 })
 export class SignUpComponent implements OnInit {
   firstName: string;
