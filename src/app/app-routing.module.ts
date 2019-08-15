@@ -2,12 +2,10 @@ import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 
 import { LandingComponent } from "./components/landing/landing.component";
-import { LoginComponent } from "./components/login/login.component";
-import { SignUpComponent } from "./components/sign-up/sign-up.component";
+import { ScannerComponent } from "./components/scanner/scanner.component";
 
 const routes: Routes = [
-  { path: "login", component: LoginComponent },
-  { path: "register", component: SignUpComponent },
+  { path: "scan", component: ScannerComponent },
   { path: "", component: LandingComponent },
   { path: "**", redirectTo: "/" }
 ];

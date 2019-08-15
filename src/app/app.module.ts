@@ -17,6 +17,7 @@ import { SignUpComponent } from "./components/sign-up/sign-up.component";
 import { AuthEffects } from "./store/effects/auth.effects";
 import { UserEffects } from "./store/effects/user.effects";
 import { appReducers, storageSyncReducer } from "./store/reducers/app.reducers";
+import { ScannerComponent } from './components/scanner/scanner.component';
 
 const metaReducers: Array<MetaReducer<any, any>> = [storageSyncReducer];
 
@@ -26,7 +27,8 @@ const metaReducers: Array<MetaReducer<any, any>> = [storageSyncReducer];
     LandingComponent,
     LoginComponent,
     ModalComponent,
-    SignUpComponent
+    SignUpComponent,
+    ScannerComponent
   ],
   imports: [
     AppRoutingModule,

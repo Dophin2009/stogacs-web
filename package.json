@@ -25,6 +25,7 @@
     "@ngrx/router-store": "8.2.0",
     "@ngrx/store": "8.2.0",
     "@ngrx/store-devtools": "^8.2.0",
+    "@zxing/library": "^0.15.1",
     "bootstrap": "4.3.1",
     "rxjs": "~6.4.0",
     "tslib": "1.10.0",
