@@ -5,14 +5,17 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 
 import {
-  IAuthToken, IBasicAuth, IRegistration, IRegistrationResponse
+  IAuthToken,
+  IBasicAuth,
+  IRegistration,
+  IRegistrationResponse
 } from "../models/auth.interface";
 
 @Injectable({
   providedIn: "root"
 })
 export class AuthService {
-  private readonly BASE_URL = "http://localhost:8080/user/auth";
+  private readonly BASE_URL = "https://192.168.19.22:4201/user/auth";
 
   constructor(private httpClient: HttpClient) {}
 

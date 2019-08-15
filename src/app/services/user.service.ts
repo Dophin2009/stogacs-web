@@ -10,7 +10,7 @@ import { IUser } from "../models/user.interface";
   providedIn: "root"
 })
 export class UserService {
-  private readonly BASE_URL = "http://localhost:8080/user";
+  private readonly BASE_URL = "https://192.168.19.22:4201/user";
 
   constructor(private httpClient: HttpClient) {}
 
