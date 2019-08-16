@@ -1,27 +1,29 @@
-# StogacsWeb
+# Conestoga Computer Science Club Sign-In Client
+This is the Angular-based web client for the Conestoga Computer Science Club's sign-in and attendance tracking service.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.2.0.
+See the README for the web service for details on it.
 
-## Development server
+## Requirements
+- Yarn or NPM
+  - Angular CLI
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Testing
 
-## Code scaffolding
+### Setting Up
+Change the hard-coded API host strings (`BASE_URL`) in [AuthService](/src/app/services/auth.service.ts) and [UserService](/src/app/services/user.service.ts) to match your development instance of the web service.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Install the required dependencies:
+```
+yarn install //or npm install
+```
 
-## Build
+Run the application (default is port 4200):
+```
+ng serve
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+### Usage
+All basic functionality exists, but the UI itself is still a work in progress. 
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+Navigate to `/scan` to test the QR code scanning. 
+No UI navigation feature to reach this page has been added yet.
