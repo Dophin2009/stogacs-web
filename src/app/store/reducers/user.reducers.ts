@@ -1,4 +1,4 @@
-import { IUser } from "../../models/user.interface";
+import { ISignInRequest, IUser } from "../../models/user.interface";
 import { EUserActions, UserActions } from "../actions/user.actions";
 import { initialUserState, IUserState } from "../state/user.state";
 
@@ -17,6 +17,15 @@ export const userReducers = (
       return {
         ...state,
         user: null
+      };
+    }
+    case EUserActions.SignInSuccess: {
+      return {
+        ...state,
+        signInRequests: [
+          ...state.signInRequests,
+          action.payload as ISignInRequest
+        ]
       };
     }
     default: {

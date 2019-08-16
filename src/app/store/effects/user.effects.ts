@@ -7,11 +7,17 @@ import { Router } from "@angular/router";
 import { Actions, Effect, ofType } from "@ngrx/effects";
 
 import { IBasicAuth } from "../../models/auth.interface";
-import { IUser } from "../../models/user.interface";
+import { ISignInRequest, IUser } from "../../models/user.interface";
 import { UserService } from "../../services/user.service";
 import { LogoutAction } from "../actions/auth.actions";
 import {
-  EUserActions, GetUserAction, GetUserFailureAction, GetUserSuccessAction
+  EUserActions,
+  GetUserAction,
+  GetUserFailureAction,
+  GetUserSuccessAction,
+  SignInAction,
+  SignInFailureAction,
+  SignInSuccessAction
 } from "../actions/user.actions";
 
 @Injectable()
@@ -43,6 +49,20 @@ export class UserEffects {
         return of(new LogoutAction());
       }
       return of();
+    })
+  );
+
+  @Effect()
+  putSignInRequest$ = this._actions$.pipe(
+    ofType(EUserActions.SignIn),
+    map((action: SignInAction) => action.payload),
+    switchMap((payload: { auth: IBasicAuth; request: ISignInRequest }) => {
+      return this._userService.signIn(payload.auth, payload.request).pipe(
+        map((response: ISignInRequest) => new SignInSuccessAction(response)),
+        catchError((error: HttpErrorResponse) =>
+          of(new SignInFailureAction(error))
+        )
+      );
     })
   );
 }
