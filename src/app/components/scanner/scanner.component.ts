@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { MatDialogRef } from "@angular/material";
 import { Store } from "@ngrx/store";
 
 import { IAuthToken, IBasicAuth } from "../../models/auth.interface";
@@ -12,7 +13,7 @@ import { IAppState } from "../../store/state/app.state";
 @Component({
   selector: "app-scanner",
   templateUrl: "./scanner.component.html",
-  styleUrls: ["./scanner.component.scss", "../shared.styles.scss"]
+  styleUrls: ["./scanner.component.scss"]
 })
 export class ScannerComponent implements OnInit {
   result: string = "No scan";
@@ -21,7 +22,8 @@ export class ScannerComponent implements OnInit {
 
   constructor(
     private _store: Store<IAppState>,
-    private _scannerService: ScannerService
+    private _scannerService: ScannerService,
+    private _dialogRef: MatDialogRef<ScannerComponent>
   ) {}
 
   ngOnInit() {
@@ -32,14 +34,7 @@ export class ScannerComponent implements OnInit {
       this.user = user;
     });
 
-    if (this.auth != null) {
-      this._store.dispatch(
-        new GetUserAction({
-          username: this.auth.email,
-          password: this.auth.token
-        })
-      );
-    }
+    this.scan();
   }
 
   scan() {
@@ -49,10 +44,8 @@ export class ScannerComponent implements OnInit {
       if (resParts.length !== 2) {
         return;
       }
-
       const sessionId = resParts[0];
       const timecode = resParts[1];
-
       this.dispatchRequest(sessionId, timecode);
     });
   }
@@ -74,5 +67,9 @@ export class ScannerComponent implements OnInit {
     this._store.dispatch(
       new SignInAction({ auth: authentication, request: signInRequest })
     );
+  }
+
+  close() {
+    this._dialogRef.close();
   }
 }

@@ -1,37 +1,28 @@
-<div class="row">
-  <div class="col-md-4">
-    <h1>Log in</h1>
-    <hr />
-    <br />
-    <form (ngSubmit)="onSubmit()">
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input
-          [(ngModel)]="email"
-          name="email"
-          type="email"
-          required
-          id="email"
-          class="form-control"
-        />
-      </div>
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input
-          [(ngModel)]="password"
-          name="password"
-          type="password"
-          required
-          id="password"
-          class="form-control"
-        />
-      </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
-      <!-- <a [routerLink]="['/']" class="btn btn-primary">Cancel</a> -->
-    </form>
-    <!-- <p>
-      <span>Don't have an account?&nbsp;</span>
-      <a [routerLink]="['/sign-up']">Sign up!</a>
-    </p> -->
-  </div>
-</div>
+<h2 mat-dialog-title>Log in</h2>
+<mat-divider></mat-divider>
+<br />
+
+<form [formGroup]="form">
+  <mat-form-field>
+    <mat-label>
+      Email
+      <span *ngIf="email.invalid && (email.dirty || email.touched)">
+        -- invalid!
+      </span>
+    </mat-label>
+    <input matInput type="email" formControlName="email" />
+  </mat-form-field>
+  <br />
+  <mat-form-field>
+    <mat-label>Password</mat-label>
+    <input matInput type="password" formControlName="password" />
+  </mat-form-field>
+  <mat-dialog-actions>
+    <button mat-button (click)="close()">
+      Close
+    </button>
+    <button mat-button (click)="submit()">
+      Submit
+    </button>
+  </mat-dialog-actions>
+</form>

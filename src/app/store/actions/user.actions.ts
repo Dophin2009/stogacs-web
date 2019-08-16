@@ -8,6 +8,7 @@ export enum EUserActions {
   GetUser = "[User] Get User",
   GetUserSuccess = "[User] Get User Success",
   GetUserFailure = "[User] Get User Failure",
+  ClearUser = "[User] Clear User",
   SignIn = "[User] SignIn",
   SignInSuccess = "[User] Sign-in Success",
   SignInFailure = "[User] Sign-in Failure"
@@ -26,6 +27,11 @@ export class GetUserSuccessAction implements Action {
 export class GetUserFailureAction implements Action {
   type = EUserActions.GetUserFailure;
   constructor(public payload: HttpErrorResponse) {}
+}
+
+export class ClearUserAction implements Action {
+  type = EUserActions.ClearUser;
+  constructor() {}
 }
 
 export class SignInAction implements Action {

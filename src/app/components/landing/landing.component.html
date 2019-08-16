@@ -1,27 +1,25 @@
-<div class="row justify-content-center">
-  <div class="col-xl-7 col-lg-5 col-md-5 col-sm-12 col-xs-12 text-center">
-    <h1>Conestoga Computer Science Club</h1>
-    <hr />
-    <br />
-    <div *ngIf="authToken == null || user == null">
-      <button (click)="openModal('login-modal')" class="btn btn-primary">
+<mat-toolbar>
+  <mat-toolbar-row>
+    <span>StogaCS</span>
+    <span class="flex-fill"></span>
+    <span *ngIf="authToken == null && user == null">
+      <button mat-button (click)="openLogin()">
         Log in
       </button>
-      <button (click)="openModal('register-modal')" class="btn btn-primary">
+      <span class="spacer-4"></span>
+      <button mat-button (click)="openRegistration()">
         Sign up
       </button>
-
-      <jw-modal id="login-modal">
-        <app-login></app-login>
-      </jw-modal>
-
-      <jw-modal id="register-modal">
-        <app-sign-up></app-sign-up>
-      </jw-modal>
-    </div>
-    <div *ngIf="authToken != null">
-      <button (click)="dispatchLogout()" class="btn btn-primary">Logout</button>
-      <p *ngIf="user != null">{{ user.name }}</p>
-    </div>
-  </div>
-</div>
+    </span>
+    <span *ngIf="authToken != null && user != null">
+      <button mat-button (click)="openScanner()">
+        Scan code
+      </button>
+      <span class="spacer-4"></span>
+      <button mat-button (click)="dispatchLogout()">
+        Logout
+      </button>
+    </span>
+  </mat-toolbar-row>
+</mat-toolbar>
+<mat-divider></mat-divider>

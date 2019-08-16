@@ -1,3 +1,5 @@
+import { state } from "@angular/animations";
+
 import { ISignInRequest, IUser } from "../../models/user.interface";
 import { EUserActions, UserActions } from "../actions/user.actions";
 import { initialUserState, IUserState } from "../state/user.state";
@@ -14,6 +16,12 @@ export const userReducers = (
       };
     }
     case EUserActions.GetUserFailure: {
+      return {
+        ...state,
+        user: null
+      };
+    }
+    case EUserActions.ClearUser: {
       return {
         ...state,
         user: null

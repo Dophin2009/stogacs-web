@@ -1,89 +1,54 @@
-<div class="row">
-  <div class="col-md-4">
-    <h1>Sign up</h1>
-    <hr />
-    <br />
-    <form (ngSubmit)="onSubmit()" ngNativeValidate>
-      <div class="form-group">
-        <label for="first-name">First name:</label>
-        <input
-          [(ngModel)]="firstName"
-          name="first-name"
-          type="text"
-          required
-          placeholder="John"
-          id="first-name"
-          class="form-control"
-        />
-      </div>
-      <div class="form-group">
-        <label for="last-name">Last name:</label>
-        <input
-          [(ngModel)]="lastName"
-          name="last-name"
-          type="text"
-          required
-          placeholder="Doe"
-          id="last-name"
-          class="form-control"
-        />
-      </div>
-      <div class="form-group">
-        <label for="email">Email address:</label>
-        <input
-          [(ngModel)]="email"
-          name="email"
-          type="email"
-          required
-          placeholder="john@doe.com"
-          id="email"
-          class="form-control"
-        />
-      </div>
-      <div class="form-group">
-        <label for="grade">Current grade level:</label>
-        <input
-          [(ngModel)]="grade"
-          name="grade"
-          type="number"
-          required
-          placeholder="10"
-          min="8"
-          max="13"
-          id="grade"
-          class="form-control"
-        />
-      </div>
-      <div class="form-group">
-        <label for="password">Enter a password:</label>
-        <input
-          [(ngModel)]="password"
-          name="password"
-          type="password"
-          required
-          placeholder="********"
-          id="password"
-          class="form-control"
-        />
-      </div>
-      <div class="form-group">
-        <label for="matching-password">Confirm password:</label>
-        <input
-          [(ngModel)]="matchingPassword"
-          name="matching-password"
-          type="password"
-          required
-          placeholder="********"
-          id="matching-password"
-          class="form-control"
-        />
-      </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
-      <!-- <a [routerLink]="['/']" class="btn btn-primary">Cancel</a> -->
-    </form>
-    <!-- <p>
-      <span>Already registered?&nbsp;</span>
-      <a [routerLink]="['/login']">Log in!</a>
-    </p> -->
-  </div>
-</div>
+<h1 mat-dialog-title>Sign up</h1>
+<mat-divider></mat-divider>
+<br />
+
+<form [formGroup]="form">
+  <mat-form-field>
+    <mat-label>First name</mat-label>
+    <input matInput placeholder="John" formControlName="firstName" />
+  </mat-form-field>
+  <br />
+  <mat-form-field>
+    <mat-label>Last name</mat-label>
+    <input matInput placeholder="Doe" formControlName="lastName" />
+  </mat-form-field>
+  <br />
+  <mat-form-field>
+    <mat-label>Email address</mat-label>
+    <input matInput placeholder="john@doe.com" formControlName="email" />
+  </mat-form-field>
+  <br />
+  <mat-form-field class="form-group">
+    <mat-label>Current grade</mat-label>
+    <input matInput placeholder="10" formControlName="grade" />
+  </mat-form-field>
+  <br />
+  <mat-form-field>
+    <mat-label>Enter a password</mat-label>
+    <input
+      matInput
+      type="password"
+      placeholder="********"
+      formControlName="password"
+    />
+  </mat-form-field>
+  <br />
+  <mat-form-field>
+    <mat-label>Confirm password</mat-label>
+    <input
+      matInput
+      type="password"
+      placeholder="********"
+      formControlName="matchingPassword"
+    />
+  </mat-form-field>
+  <br />
+  <mat-dialog-actions>
+    <button mat-button (click)="close()">
+      Close
+    </button>
+    <button mat-button (click)="submit()">
+      Submit
+    </button>
+  </mat-dialog-actions>
+</form>

@@ -1,28 +1,63 @@
 import { Component, OnInit } from "@angular/core";
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators
+} from "@angular/forms";
+import { MatDialogRef } from "@angular/material";
 import { Store } from "@ngrx/store";
 
-import { IAuthToken, IBasicAuth } from "../../models/auth.interface";
+import { IBasicAuth } from "../../models/auth.interface";
 import { Login } from "../../store/actions/auth.actions";
 import { IAppState } from "../../store/state/app.state";
 
 @Component({
   selector: "app-login",
   templateUrl: "./login.component.html",
-  styleUrls: ["./login.component.scss", "../shared.styles.scss"]
+  styleUrls: ["./login.component.scss"]
 })
 export class LoginComponent implements OnInit {
-  email: string;
-  password: string;
+  form: FormGroup;
 
-  constructor(private _store: Store<IAppState>) {}
+  constructor(
+    private _store: Store<IAppState>,
+    private _fb: FormBuilder,
+    private _dialogRef: MatDialogRef<LoginComponent>
+  ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.form = this._fb.group({
+      email: [
+        null,
+        Validators.compose([Validators.required, Validators.email])
+      ],
+      password: [null, [Validators.required]]
+    });
+  }
 
-  onSubmit() {
+  submit() {
+    if (this.form.invalid) {
+      return;
+    }
+
+    const formValues = this.form.value;
     const credentials: IBasicAuth = {
-      username: this.email,
-      password: this.password
+      username: formValues.email.trim(),
+      password: formValues.password.trim()
     };
     this._store.dispatch(new Login(credentials));
+  }
+
+  close() {
+    this._dialogRef.close();
+  }
+
+  get email() {
+    return this.form.get("email");
+  }
+
+  get password() {
+    return this.form.get("password");
   }
 }

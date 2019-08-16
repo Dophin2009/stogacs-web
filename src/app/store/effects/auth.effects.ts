@@ -6,13 +6,22 @@ import { Router } from "@angular/router";
 import { Actions, Effect, ofType } from "@ngrx/effects";
 
 import {
-  IAuthToken, IBasicAuth, IRegistration, IRegistrationResponse
+  IAuthToken,
+  IBasicAuth,
+  IRegistration,
+  IRegistrationResponse
 } from "../../models/auth.interface";
 import { AuthService } from "../../services/auth.service";
 import {
-  EAuthActions, Login, LoginFailure, LoginSuccess, Register, RegisterFailure,
+  EAuthActions,
+  Login,
+  LoginFailure,
+  LoginSuccess,
+  Register,
+  RegisterFailure,
   RegisterSuccess
 } from "../actions/auth.actions";
+import { GetUserAction } from "../actions/user.actions";
 
 @Injectable()
 export class AuthEffects {
@@ -54,5 +63,4 @@ export class AuthEffects {
       this._router.navigateByUrl("/");
     })
   );
-  
 }
