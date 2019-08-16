@@ -1,5 +1,3 @@
-import { Observable } from "rxjs";
-
 import { Component, OnInit } from "@angular/core";
 import { Store } from "@ngrx/store";
 
@@ -18,8 +16,8 @@ import { IAppState } from "../../store/state/app.state";
   styleUrls: ["./landing.component.scss", "../shared.styles.scss"]
 })
 export class LandingComponent implements OnInit {
-  authToken: Observable<IAuthToken> = this._store.select(selectAuth);
-  user: Observable<IUser> = this._store.select(selectUser);
+  authToken: IAuthToken;
+  user: IUser;
 
   constructor(
     private _store: Store<IAppState>,
@@ -27,13 +25,22 @@ export class LandingComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.authToken.subscribe((token: IAuthToken) => {
-      if (token != null) {
-        this._store.dispatch(
-          new GetUserAction({ username: token.email, password: token.token })
-        );
-      }
+    this._store.select(selectAuth).subscribe(authToken => {
+      this.authToken = authToken;
     });
+
+    this._store.select(selectUser).subscribe(user => {
+      this.user = user;
+    });
+
+    if (this.authToken != null) {
+      this._store.dispatch(
+        new GetUserAction({
+          username: this.authToken.email,
+          password: this.authToken.token
+        })
+      );
+    }
   }
 
   openModal(id: string) {

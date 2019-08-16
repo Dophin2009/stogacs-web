@@ -1,16 +1,9 @@
-<div class="row">
-  <div class="col-xl-7 col-lg-5 col-md-5 col-sm-12 col-xs-12">
+<div class="row justify-content-center">
+  <div class="col-xl-7 col-lg-5 col-md-5 col-sm-12 col-xs-12 text-center">
     <h1>Conestoga Computer Science Club</h1>
     <hr />
     <br />
-    <div
-      *ngIf="
-        (authToken | async) == null && (user | async) == null;
-        then welcome;
-        else dashboard
-      "
-    ></div>
-    <ng-template #welcome>
+    <div *ngIf="authToken == null || user == null">
       <button (click)="openModal('login-modal')" class="btn btn-primary">
         Log in
       </button>
@@ -25,10 +18,10 @@
       <jw-modal id="register-modal">
         <app-sign-up></app-sign-up>
       </jw-modal>
-    </ng-template>
-    <ng-template #dashboard>
+    </div>
+    <div *ngIf="authToken != null">
       <button (click)="dispatchLogout()" class="btn btn-primary">Logout</button>
-      <p>{{ (user | async).name }}</p>
-    </ng-template>
+      <p *ngIf="user != null">{{ user.name }}</p>
+    </div>
   </div>
 </div>
