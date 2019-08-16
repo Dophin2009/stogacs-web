@@ -16,6 +16,7 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { EffectsModule } from "@ngrx/effects";
 import { MetaReducer, StoreModule } from "@ngrx/store";
 import { StoreDevtoolsModule } from "@ngrx/store-devtools";
+import { ZXingScannerModule } from "@zxing/ngx-scanner";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
@@ -50,6 +51,7 @@ const metaReducers: Array<MetaReducer<any, any>> = [storageSyncReducer];
     MatToolbarModule,
     MatInputModule,
     ReactiveFormsModule,
+    ZXingScannerModule,
     EffectsModule.forRoot([AuthEffects, UserEffects]),
     StoreModule.forRoot(appReducers, { metaReducers }),
     StoreDevtoolsModule.instrument({

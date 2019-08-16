@@ -2,8 +2,22 @@
 <mat-divider></mat-divider>
 <br />
 
-<div id="camera-wrapper">
+<!-- <div id="camera-wrapper">
   <video id="camera"></video>
+</div> -->
+
+<zxing-scanner
+  #scanner
+  [formats]="['QR-CODE']"
+  (camerasFound)="setAvailableCameras($event)"
+  (scanSuccess)="handleScan($event)"
+></zxing-scanner>
+
+<div>
+  <ng-template ngFor let-item [ngForOf]="availableCameras">
+    <button mat-button (click)="setCamera(item)">{{ item.label }}</button>
+  </ng-template>
 </div>
+<br />
 
 <button mat-button (click)="close()">Cancel</button>
