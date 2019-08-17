@@ -4,6 +4,7 @@ import { map, tap } from "rxjs/operators";
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 
+import { environment } from "../../environments/environment";
 import {
   IAuthToken,
   IBasicAuth,
@@ -15,7 +16,7 @@ import {
   providedIn: "root"
 })
 export class AuthService {
-  private readonly BASE_URL = "https://192.168.19.22:4201/user/auth";
+  private readonly BASE_URL = environment.serviceHost + "/user/auth";
 
   constructor(private httpClient: HttpClient) {}
 
@@ -44,11 +45,6 @@ export class AuthService {
           return token;
         })
       );
-    // .pipe(
-    //   tap((token: IAuthToken) => {
-    //     localStorage.setItem("token", token.token);
-    //   })
-    // );
 
     return response;
   }

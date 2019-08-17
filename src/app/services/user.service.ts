@@ -1,10 +1,11 @@
 import { Observable } from "rxjs";
 
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Store } from "@ngrx/store";
 
-import { IAuthToken, IBasicAuth } from "../models/auth.interface";
+import { environment } from "../../environments/environment";
+import { IAuthToken } from "../models/auth.interface";
 import { ISignInRequest, IUser } from "../models/user.interface";
 import { selectAuth } from "../store/selectors/auth.selectors";
 import { IAppState } from "../store/state/app.state";
@@ -13,7 +14,7 @@ import { IAppState } from "../store/state/app.state";
   providedIn: "root"
 })
 export class UserService {
-  private readonly BASE_URL = "https://192.168.19.22:4201/user";
+  private readonly BASE_URL = environment.serviceHost + "/user";
 
   auth: IAuthToken;
 
