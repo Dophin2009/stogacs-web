@@ -21,7 +21,6 @@ import {
   RegisterFailure,
   RegisterSuccess
 } from "../actions/auth.actions";
-import { GetUserAction } from "../actions/user.actions";
 
 @Injectable()
 export class AuthEffects {
@@ -52,15 +51,6 @@ export class AuthEffects {
         map((response: IRegistrationResponse) => new RegisterSuccess(response)),
         catchError(error => of(new RegisterFailure(error)))
       );
-    })
-  );
-
-  @Effect()
-  reloadRoot$ = this._actions$.pipe(
-    ofType(EAuthActions.LoginSuccess, EAuthActions.Logout),
-    take(1),
-    tap(() => {
-      this._router.navigateByUrl("/");
     })
   );
 }

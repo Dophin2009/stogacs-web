@@ -5,8 +5,11 @@ import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import {
   MatButtonModule,
+  MatButtonToggleModule,
+  MatCardModule,
   MatDialogModule,
   MatDividerModule,
+  MatExpansionModule,
   MatFormFieldModule,
   MatInputModule,
   MatToolbarModule
@@ -24,6 +27,7 @@ import { LandingComponent } from "./components/landing/landing.component";
 import { LoginComponent } from "./components/login/login.component";
 import { ScannerComponent } from "./components/scanner/scanner.component";
 import { SignUpComponent } from "./components/sign-up/sign-up.component";
+import { UserInfoComponent } from "./components/user-info/user-info.component";
 import { AuthEffects } from "./store/effects/auth.effects";
 import { UserEffects } from "./store/effects/user.effects";
 import { appReducers, storageSyncReducer } from "./store/reducers/app.reducers";
@@ -36,7 +40,8 @@ const metaReducers: Array<MetaReducer<any, any>> = [storageSyncReducer];
     LandingComponent,
     LoginComponent,
     SignUpComponent,
-    ScannerComponent
+    ScannerComponent,
+    UserInfoComponent
   ],
   imports: [
     AppRoutingModule,
@@ -45,8 +50,11 @@ const metaReducers: Array<MetaReducer<any, any>> = [storageSyncReducer];
     FormsModule,
     HttpClientModule,
     MatButtonModule,
+    MatButtonToggleModule,
+    MatCardModule,
     MatDialogModule,
     MatDividerModule,
+    MatExpansionModule,
     MatFormFieldModule,
     MatToolbarModule,
     MatInputModule,

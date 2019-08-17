@@ -32,12 +32,7 @@ export class LandingComponent implements OnInit {
       this.authToken = authToken;
 
       if (this.authToken != null) {
-        this._store.dispatch(
-          new GetUserAction({
-            username: this.authToken.email,
-            password: this.authToken.token
-          })
-        );
+        this._store.dispatch(new GetUserAction());
       }
     });
 
@@ -73,7 +68,7 @@ export class LandingComponent implements OnInit {
   openScanner() {
     this.dialog.open(ScannerComponent, {
       height: "90%",
-      maxHeight: "600px",
+      maxHeight: "675px",
       width: "90%",
       autoFocus: true
     });

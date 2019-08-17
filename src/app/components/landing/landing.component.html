@@ -23,3 +23,11 @@
   </mat-toolbar-row>
 </mat-toolbar>
 <mat-divider></mat-divider>
+
+<br />
+
+<div *ngIf="authToken != null && user == null"></div>
+
+<div *ngIf="authToken != null && user != null">
+  <app-user-info></app-user-info>
+</div>

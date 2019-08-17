@@ -9,6 +9,9 @@ export enum EUserActions {
   GetUserSuccess = "[User] Get User Success",
   GetUserFailure = "[User] Get User Failure",
   ClearUser = "[User] Clear User",
+  GetSignInRequests = "[User] Get Sign-In Requests",
+  GetSignInRequestsSuccess = "[User] Get Sign-In Requests Success",
+  GetSignInRequestsFailure = "[User] Get Sign-In Requests Failure",
   SignIn = "[User] SignIn",
   SignInSuccess = "[User] Sign-in Success",
   SignInFailure = "[User] Sign-in Failure"
@@ -16,7 +19,7 @@ export enum EUserActions {
 
 export class GetUserAction implements Action {
   type = EUserActions.GetUser;
-  constructor(public payload: IBasicAuth) {}
+  constructor() {}
 }
 
 export class GetUserSuccessAction implements Action {
@@ -34,9 +37,24 @@ export class ClearUserAction implements Action {
   constructor() {}
 }
 
+export class GetSignInRequestsAction implements Action {
+  type = EUserActions.GetSignInRequests;
+  constructor() {}
+}
+
+export class GetSignInRequestsSuccessAction implements Action {
+  type = EUserActions.GetSignInRequestsSuccess;
+  constructor(public payload: ISignInRequest[]) {}
+}
+
+export class GetSignInRequestsFailureAction implements Action {
+  type = EUserActions.GetSignInRequestsFailure;
+  constructor(public payload: HttpErrorResponse) {}
+}
+
 export class SignInAction implements Action {
   type = EUserActions.SignIn;
-  constructor(public payload: { auth: IBasicAuth; request: ISignInRequest }) {}
+  constructor(public payload: ISignInRequest) {}
 }
 
 export class SignInSuccessAction implements Action {
@@ -53,6 +71,10 @@ export type UserActions =
   | GetUserAction
   | GetUserSuccessAction
   | GetUserFailureAction
+  | ClearUserAction
+  | GetSignInRequestsAction
+  | GetSignInRequestsSuccessAction
+  | GetSignInRequestsFailureAction
   | SignInAction
   | SignInSuccessAction
   | SignInFailureAction;

@@ -18,7 +18,7 @@ import { IAppState } from "../../store/state/app.state";
 export class ScannerComponent implements OnInit {
   @ViewChild(ZXingScannerComponent, { static: false })
   scanner: ZXingScannerComponent;
-  availableCameras: MediaDeviceInfo[];
+  availableCameras: MediaDeviceInfo[] = [];
   lastScan: string;
 
   user: IUser;
@@ -63,13 +63,8 @@ export class ScannerComponent implements OnInit {
       timecode: timecode
     };
 
-    const authentication: IBasicAuth = {
-      username: this.user.email,
-      password: this.auth.token
-    };
-    this._store.dispatch(
-      new SignInAction({ auth: authentication, request: signInRequest })
-    );
+    this._store.dispatch(new SignInAction(signInRequest));
+    console.log("dispatched");
   }
 
   setCamera(camera: MediaDeviceInfo) {
@@ -78,6 +73,7 @@ export class ScannerComponent implements OnInit {
 
   setAvailableCameras(cameras: MediaDeviceInfo[]) {
     this.availableCameras = cameras;
+    // this.scanner.device = cameras[0];
   }
 
   close() {

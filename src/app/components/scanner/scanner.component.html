@@ -2,9 +2,9 @@
 <mat-divider></mat-divider>
 <br />
 
-<!-- <div id="camera-wrapper">
-  <video id="camera"></video>
-</div> -->
+<div *ngIf="availableCameras.length === 0">
+  No cameras available
+</div>
 
 <zxing-scanner
   #scanner
@@ -14,9 +14,14 @@
 ></zxing-scanner>
 
 <div>
-  <ng-template ngFor let-item [ngForOf]="availableCameras">
-    <button mat-button (click)="setCamera(item)">{{ item.label }}</button>
-  </ng-template>
+  Camera:
+  <mat-button-toggle-group name="cameras">
+    <ng-template ngFor let-item [ngForOf]="availableCameras">
+      <mat-button-toggle (click)="setCamera(item)">
+        {{ item.label }}
+      </mat-button-toggle>
+    </ng-template>
+  </mat-button-toggle-group>
 </div>
 <br />
 

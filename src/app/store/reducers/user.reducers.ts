@@ -1,7 +1,10 @@
-import { state } from "@angular/animations";
-
-import { ISignInRequest, IUser } from "../../models/user.interface";
-import { EUserActions, UserActions } from "../actions/user.actions";
+import {
+  EUserActions,
+  GetSignInRequestsSuccessAction,
+  GetUserSuccessAction,
+  SignInSuccessAction,
+  UserActions
+} from "../actions/user.actions";
 import { initialUserState, IUserState } from "../state/user.state";
 
 export const userReducers = (
@@ -12,7 +15,7 @@ export const userReducers = (
     case EUserActions.GetUserSuccess: {
       return {
         ...state,
-        user: action.payload as IUser
+        user: (action as GetUserSuccessAction).payload
       };
     }
     case EUserActions.GetUserFailure: {
@@ -24,7 +27,14 @@ export const userReducers = (
     case EUserActions.ClearUser: {
       return {
         ...state,
-        user: null
+        user: null,
+        signInRequests: []
+      };
+    }
+    case EUserActions.GetSignInRequestsSuccess: {
+      return {
+        ...state,
+        signInRequests: (action as GetSignInRequestsSuccessAction).payload
       };
     }
     case EUserActions.SignInSuccess: {
@@ -32,7 +42,7 @@ export const userReducers = (
         ...state,
         signInRequests: [
           ...state.signInRequests,
-          action.payload as ISignInRequest
+          (action as SignInSuccessAction).payload
         ]
       };
     }
