@@ -3,8 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng build --prod && http-server -p 4200 -c-1 dist/stogacs-web -S -C ssl/server.crt -K ssl/server.key",
-    "serve": "ng serve",
+    "start": "http-server -p 4200 -c-1 dist/stogacs-web -S -C ssl/server.crt -K ssl/server.key",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
