@@ -1,5 +1,3 @@
-import { environment } from "src/environments/environment";
-
 import { HttpClientModule } from "@angular/common/http";
 import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
@@ -16,11 +14,13 @@ import {
 } from "@angular/material";
 import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { ServiceWorkerModule } from "@angular/service-worker";
 import { EffectsModule } from "@ngrx/effects";
 import { MetaReducer, StoreModule } from "@ngrx/store";
 import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 import { ZXingScannerModule } from "@zxing/ngx-scanner";
 
+import { environment } from "../environments/environment";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { LandingComponent } from "./components/landing/landing.component";
@@ -65,6 +65,9 @@ const metaReducers: Array<MetaReducer<any, any>> = [storageSyncReducer];
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production
+    }),
+    ServiceWorkerModule.register("ngsw-worker.js", {
+      enabled: environment.production
     })
   ],
   providers: [],
