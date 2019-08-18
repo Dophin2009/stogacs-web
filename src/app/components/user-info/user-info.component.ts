@@ -1,13 +1,23 @@
-import { ISignInRequest, IUser } from "src/app/models/user.interface";
-import { GetSignInRequestsAction } from "src/app/store/actions/user.actions";
+import { Component, OnInit } from "@angular/core";
+import { MatDialog } from "@angular/material";
+import { Store } from "@ngrx/store";
+
 import {
+  ISignInRequest,
+  ISignInSession,
+  IUser
+} from "../../models/user.interface";
+import {
+  ClearCurrentSignInSessionAction,
+  GetSignInRequestsAction,
+  GetSignInSessionAction
+} from "../../store/actions/user.actions";
+import {
+  selectCurrentSignInSession,
   selectSignInRequests,
   selectUser
-} from "src/app/store/selectors/user.selectors";
-import { IAppState } from "src/app/store/state/app.state";
-
-import { Component, OnInit } from "@angular/core";
-import { Store } from "@ngrx/store";
+} from "../../store/selectors/user.selectors";
+import { IAppState } from "../../store/state/app.state";
 
 @Component({
   selector: "app-user-info",
@@ -17,6 +27,7 @@ import { Store } from "@ngrx/store";
 export class UserInfoComponent implements OnInit {
   user: IUser;
   signInRequests: ISignInRequest[];
+  currentSignInSession: ISignInSession;
 
   constructor(private _store: Store<IAppState>) {}
 
@@ -29,8 +40,22 @@ export class UserInfoComponent implements OnInit {
       this.signInRequests = signInRequests;
     });
 
+    this._store.select(selectCurrentSignInSession).subscribe(signInSession => {
+      this.currentSignInSession = signInSession;
+    });
+
     this._store.dispatch(new GetSignInRequestsAction());
   }
 
-  openRequestDetails(requestId: string) {}
+  getRequestSession(sessionId: string) {
+    this._store.dispatch(new GetSignInSessionAction(sessionId));
+  }
+
+  clearCurrentSession() {
+    this._store.dispatch(new ClearCurrentSignInSessionAction());
+  }
+
+  formatISODate(s: string): string {
+    return new Date(s + "Z").toLocaleString();
+  }
 }

@@ -6,7 +6,11 @@ import { Store } from "@ngrx/store";
 
 import { environment } from "../../environments/environment";
 import { IAuthToken } from "../models/auth.interface";
-import { ISignInRequest, IUser } from "../models/user.interface";
+import {
+  ISignInRequest,
+  ISignInSession,
+  IUser
+} from "../models/user.interface";
 import { selectAuth } from "../store/selectors/auth.selectors";
 import { IAppState } from "../store/state/app.state";
 
@@ -29,7 +33,7 @@ export class UserService {
 
   getUser(): Observable<IUser> {
     const endpoint = `${this.BASE_URL}/self`;
-    const base64 = this.convertToBase64(this.auth);
+    const base64 = this.getAuthString();
 
     return this._httpClient.get<IUser>(endpoint, {
       headers: {
@@ -40,9 +44,19 @@ export class UserService {
 
   getSignInRequests(): Observable<ISignInRequest[]> {
     const endpoint = `${this.BASE_URL}/self/requests`;
-    const base64 = this.convertToBase64(this.auth);
+    const base64 = this.getAuthString();
 
     return this._httpClient.get<ISignInRequest[]>(endpoint, {
+      headers: {
+        Authorization: `Basic ${base64}`
+      }
+    });
+  }
+
+  getSignInSession(sessionId: string): Observable<ISignInSession> {
+    const endpoint = `${this.BASE_URL}/self/session/${sessionId}`;
+    const base64 = this.getAuthString();
+    return this._httpClient.get<ISignInSession>(endpoint, {
       headers: {
         Authorization: `Basic ${base64}`
       }
@@ -52,7 +66,7 @@ export class UserService {
   signIn(request: ISignInRequest): Observable<ISignInRequest> {
     console.log(this.auth);
     const endpoint = `${this.BASE_URL}/signin`;
-    const base64 = this.convertToBase64(this.auth);
+    const base64 = this.getAuthString();
 
     return this._httpClient.put<ISignInRequest>(endpoint, request, {
       headers: {
@@ -61,7 +75,7 @@ export class UserService {
     });
   }
 
-  private convertToBase64(auth: IAuthToken): string {
-    return window.btoa(`${auth.email}:${auth.token}`);
+  private getAuthString(): string {
+    return window.btoa(`${this.auth.email}:${this.auth.token}`);
   }
 }

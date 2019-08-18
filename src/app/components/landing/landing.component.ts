@@ -41,6 +41,10 @@ export class LandingComponent implements OnInit {
     });
   }
 
+  reload() {
+    window.location.reload();
+  }
+
   openLogin() {
     this.dialog.open(LoginComponent, {
       height: "80%",

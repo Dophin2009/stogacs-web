@@ -14,3 +14,8 @@ export const selectSignInRequests = createSelector(
   selectUserState,
   (state: IUserState) => state.signInRequests
 );
+
+export const selectCurrentSignInSession = createSelector(
+  selectUserState,
+  (state: IUserState) => state.currentSignInSession
+);

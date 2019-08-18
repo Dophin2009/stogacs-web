@@ -1,6 +1,6 @@
 <mat-toolbar>
   <mat-toolbar-row>
-    <span>StogaCS</span>
+    <span (click)="reload()" class="link">StogaCS</span>
     <span class="flex-fill"></span>
     <span *ngIf="authToken == null && user == null">
       <button mat-button (click)="openLogin()">
@@ -12,10 +12,6 @@
       </button>
     </span>
     <span *ngIf="authToken != null && user != null">
-      <button mat-button (click)="openScanner()">
-        Scan code
-      </button>
-      <span class="spacer-4"></span>
       <button mat-button (click)="dispatchLogout()">
         Logout
       </button>
@@ -31,3 +27,17 @@
 <div *ngIf="authToken != null && user != null">
   <app-user-info></app-user-info>
 </div>
+
+<mat-toolbar class="pin-bottom">
+  <mat-toolbar-row>
+    <mat-action-row>
+      <button mat-button (click)="openScanner()">
+        <img
+          src="../../../assets/scan.svg"
+          alt="open-scanner"
+          title="Scan code"
+        />
+      </button>
+    </mat-action-row>
+  </mat-toolbar-row>
+</mat-toolbar>

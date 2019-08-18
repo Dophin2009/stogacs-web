@@ -14,3 +14,10 @@ export interface ISignInRequest {
   timecode: string;
   success?: boolean;
 }
+
+export interface ISignInSession {
+  id: string;
+  startTime: string;
+  endTime: string;
+  meetingId: number;
+}

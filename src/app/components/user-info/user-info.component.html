@@ -7,19 +7,52 @@
   </mat-card-subtitle>
   <mat-card-content>
     <h2>Sign-In Requests</h2>
+    <div *ngIf="signInRequests.length === 0">
+      None
+    </div>
     <mat-accordion>
       <ng-template ngFor let-request [ngForOf]="signInRequests">
-        <mat-expansion-panel class="request-details">
+        <mat-expansion-panel
+          (opened)="getRequestSession(request.sessionId)"
+          (closed)="clearCurrentSession()"
+          class="request-details"
+        >
           <mat-expansion-panel-header>
-            <mat-panel-title>{{ request.time }}</mat-panel-title>
+            <mat-panel-title>
+              {{ request.success ? "Successful" : "Failed" }},
+              {{ formatISODate(request.time) }}
+            </mat-panel-title>
           </mat-expansion-panel-header>
           <ng-template matExpansionPanelContent>
-            Some deferred content
-            <mat-action-row>
-              <button mat-button (click)="openRequestDetails(request.id)">
-                Details
-              </button>
-            </mat-action-row>
+            <div>
+              <span class="bold">Information</span>
+            </div>
+            <br />
+            <div>
+              <span class="bold">Meta</span>
+              <div>
+                Time (ISO) -
+                <span class="code">{{ request.time }}Z</span>
+              </div>
+              <div>
+                Request ID -
+                <span class="code">{{ request.id.substring(0, 20) }}...</span>
+              </div>
+              <div *ngIf="currentSignInSession !== null">
+                <div>
+                  Session ID -
+                  <span class="code">
+                    {{ currentSignInSession.id.substring(0, 20) }}...
+                  </span>
+                </div>
+                <div>
+                  Meeting ID -
+                  <span class="code">
+                    {{ currentSignInSession.meetingId }}
+                  </span>
+                </div>
+              </div>
+            </div>
           </ng-template>
         </mat-expansion-panel>
       </ng-template>

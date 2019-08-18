@@ -1,6 +1,7 @@
 import {
   EUserActions,
   GetSignInRequestsSuccessAction,
+  GetSignInSessionSuccessAction,
   GetUserSuccessAction,
   SignInSuccessAction,
   UserActions
@@ -35,6 +36,18 @@ export const userReducers = (
       return {
         ...state,
         signInRequests: (action as GetSignInRequestsSuccessAction).payload
+      };
+    }
+    case EUserActions.GetSignInSessionSuccess: {
+      return {
+        ...state,
+        currentSignInSession: (action as GetSignInSessionSuccessAction).payload
+      };
+    }
+    case EUserActions.ClearCurrentSignInSession: {
+      return {
+        ...state,
+        currentSignInSession: null
       };
     }
     case EUserActions.SignInSuccess: {
