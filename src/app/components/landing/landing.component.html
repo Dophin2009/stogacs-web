@@ -31,7 +31,11 @@
 <mat-toolbar class="pin-bottom">
   <mat-toolbar-row>
     <mat-action-row>
-      <button mat-button (click)="openScanner()">
+      <button
+        *ngIf="authToken != null && user != null"
+        mat-button
+        (click)="openScanner()"
+      >
         <img
           src="../../../assets/scan.svg"
           alt="open-scanner"
