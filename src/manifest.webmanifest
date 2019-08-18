@@ -1,7 +1,7 @@
 {
-  "name": "stogacs-web",
-  "short_name": "stogacs-web",
-  "theme_color": "#1976d2",
+  "name": "StogaCS Web",
+  "short_name": "StogaCS",
+  "theme_color": "#e4e4e4",
   "background_color": "#fafafa",
   "display": "standalone",
   "scope": "/",

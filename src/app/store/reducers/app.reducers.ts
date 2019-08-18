@@ -1,6 +1,6 @@
 import { storageSync } from "@larscom/ngrx-store-storagesync";
 import { routerReducer } from "@ngrx/router-store";
-import { ActionReducer, ActionReducerMap } from "@ngrx/store";
+import { ActionReducer, ActionReducerMap, createReducer } from "@ngrx/store";
 
 import { IAppState } from "../state/app.state";
 import { authReducers } from "./auth.reducers";

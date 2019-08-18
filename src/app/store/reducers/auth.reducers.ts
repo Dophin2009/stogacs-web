@@ -2,10 +2,10 @@ import { IAuthToken } from "../../models/auth.interface";
 import { AuthActions, EAuthActions } from "../actions/auth.actions";
 import { IAuthState, initialAuthState } from "../state/auth.state";
 
-export const authReducers = (
+export function authReducers(
   state: IAuthState = initialAuthState,
   action: AuthActions
-): IAuthState => {
+): IAuthState {
   switch (action.type) {
     case EAuthActions.LoginSuccess: {
       return {
@@ -38,4 +38,4 @@ export const authReducers = (
       return state;
     }
   }
-};
+}

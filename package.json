@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "concurrently --kill-others \"ng build --watch\" \"http-server -p 4200 -c-1 dist/stogacs-web -S -C ssl/server.crt -K ssl/server.key\"",
+    "start": "ng build --prod && http-server -p 4200 -c-1 dist/stogacs-web -S -C ssl/server.crt -K ssl/server.key",
+    "serve": "ng serve",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",

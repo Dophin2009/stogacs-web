@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  serviceHost: ""
+  serviceHost: "https://stogacs-login-staging.herokuapp.com"
 };
