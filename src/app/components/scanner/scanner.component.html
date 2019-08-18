@@ -8,7 +8,7 @@
 
 <zxing-scanner
   #scanner
-  [formats]="['QR-CODE']"
+  [formats]="allowedFormats"
   (camerasFound)="setAvailableCameras($event)"
   (scanSuccess)="handleScan($event)"
 ></zxing-scanner>

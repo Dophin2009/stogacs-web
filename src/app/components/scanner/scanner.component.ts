@@ -1,9 +1,10 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { MatDialogRef } from "@angular/material";
 import { Store } from "@ngrx/store";
+import { BarcodeFormat } from "@zxing/library/esm5";
 import { ZXingScannerComponent } from "@zxing/ngx-scanner";
 
-import { IAuthToken, IBasicAuth } from "../../models/auth.interface";
+import { IAuthToken } from "../../models/auth.interface";
 import { ISignInRequest, IUser } from "../../models/user.interface";
 import { SignInAction } from "../../store/actions/user.actions";
 import { selectAuth } from "../../store/selectors/auth.selectors";
@@ -18,6 +19,7 @@ import { IAppState } from "../../store/state/app.state";
 export class ScannerComponent implements OnInit {
   @ViewChild(ZXingScannerComponent, { static: false })
   scanner: ZXingScannerComponent;
+  allowedFormats = [BarcodeFormat.QR_CODE];
   availableCameras: MediaDeviceInfo[] = [];
   lastScan: string;
 
