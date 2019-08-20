@@ -32,8 +32,9 @@
   <mat-toolbar-row>
     <mat-action-row>
       <button
-        *ngIf="authToken != null && user != null"
         mat-button
+        matTooltip="Scan a session QR code"
+        *ngIf="authToken != null && user != null"
         (click)="openScanner()"
       >
         <img

@@ -12,7 +12,8 @@ import {
   MatIconModule,
   MatInputModule,
   MatProgressSpinnerModule,
-  MatToolbarModule
+  MatToolbarModule,
+  MatTooltipModule
 } from "@angular/material";
 import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
@@ -62,6 +63,7 @@ const metaReducers: Array<MetaReducer<any, any>> = [storageSyncReducer];
     MatInputModule,
     MatProgressSpinnerModule,
     MatToolbarModule,
+    MatTooltipModule,
     ReactiveFormsModule,
     ZXingScannerModule,
     EffectsModule.forRoot([AuthEffects, UserEffects]),
