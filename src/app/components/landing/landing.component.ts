@@ -9,7 +9,7 @@ import {
   ClearUserAction,
   GetUserAction
 } from "../../store/actions/user.actions";
-import { selectAuth } from "../../store/selectors/auth.selectors";
+import { selectAuthToken } from "../../store/selectors/auth.selectors";
 import { selectUser } from "../../store/selectors/user.selectors";
 import { IAppState } from "../../store/state/app.state";
 import { LoginComponent } from "../login/login.component";
@@ -28,7 +28,7 @@ export class LandingComponent implements OnInit {
   constructor(private _store: Store<IAppState>, private dialog: MatDialog) {}
 
   ngOnInit() {
-    this._store.select(selectAuth).subscribe(authToken => {
+    this._store.select(selectAuthToken).subscribe(authToken => {
       this.authToken = authToken;
 
       if (this.authToken != null) {

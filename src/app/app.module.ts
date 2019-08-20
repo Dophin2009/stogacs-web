@@ -9,7 +9,9 @@ import {
   MatDividerModule,
   MatExpansionModule,
   MatFormFieldModule,
+  MatIconModule,
   MatInputModule,
+  MatProgressSpinnerModule,
   MatToolbarModule
 } from "@angular/material";
 import { BrowserModule } from "@angular/platform-browser";
@@ -56,8 +58,10 @@ const metaReducers: Array<MetaReducer<any, any>> = [storageSyncReducer];
     MatDividerModule,
     MatExpansionModule,
     MatFormFieldModule,
-    MatToolbarModule,
+    MatIconModule,
     MatInputModule,
+    MatProgressSpinnerModule,
+    MatToolbarModule,
     ReactiveFormsModule,
     ZXingScannerModule,
     EffectsModule.forRoot([AuthEffects, UserEffects]),

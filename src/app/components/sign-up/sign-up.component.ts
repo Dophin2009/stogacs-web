@@ -1,10 +1,23 @@
+import {
+  selectLoginStateNotifier,
+  selectRegistrationStateNotifier
+} from "src/app/store/selectors/auth.selectors";
+import {
+  LoginStateNotifier,
+  RegistrationStateNotifier
+} from "src/app/store/state/auth.state";
+
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { MatDialogRef } from "@angular/material";
+import { MatDialogRef, MatIconRegistry } from "@angular/material";
+import { DomSanitizer } from "@angular/platform-browser";
 import { Store } from "@ngrx/store";
 
 import { IRegistration } from "../../models/auth.interface";
-import { Register } from "../../store/actions/auth.actions";
+import {
+  ClearRegistrationStateAction,
+  Register
+} from "../../store/actions/auth.actions";
 import { IAppState } from "../../store/state/app.state";
 import { LoginComponent } from "../login/login.component";
 
@@ -16,13 +29,34 @@ import { LoginComponent } from "../login/login.component";
 export class SignUpComponent implements OnInit {
   form: FormGroup;
 
+  registrationStateNotifier: RegistrationStateNotifier;
+  loginStateNotifier: LoginStateNotifier;
+
   constructor(
     private _store: Store<IAppState>,
     private _fb: FormBuilder,
-    private _dialogRef: MatDialogRef<LoginComponent>
-  ) {}
+    private _dialogRef: MatDialogRef<LoginComponent>,
+    private _iconRegistry: MatIconRegistry,
+    private _sanitizer: DomSanitizer
+  ) {
+    _iconRegistry.addSvgIcon(
+      "done",
+      _sanitizer.bypassSecurityTrustResourceUrl("assets/done.svg")
+    );
+
+    _iconRegistry.addSvgIcon(
+      "failed",
+      _sanitizer.bypassSecurityTrustResourceUrl("asset/error.svg")
+    );
+  }
 
   ngOnInit() {
+    this._store
+      .select(selectRegistrationStateNotifier)
+      .subscribe((registrationStateNotifier: RegistrationStateNotifier) => {
+        this.registrationStateNotifier = registrationStateNotifier;
+      });
+
     this.form = this._fb.group({
       firstName: [null, Validators.required],
       lastName: [null, Validators.required],
@@ -60,7 +94,20 @@ export class SignUpComponent implements OnInit {
   }
 
   close() {
+    this._store.dispatch(new ClearRegistrationStateAction());
     this._dialogRef.close();
+  }
+
+  registrationPending() {
+    return this.registrationStateNotifier === RegistrationStateNotifier.PENDING;
+  }
+
+  registrationSuccess() {
+    return this.registrationStateNotifier === RegistrationStateNotifier.SUCCESS;
+  }
+
+  registrationFailed() {
+    return this.registrationStateNotifier === RegistrationStateNotifier.FAILURE;
   }
 
   get firstName() {

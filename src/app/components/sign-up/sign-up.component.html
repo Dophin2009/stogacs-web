@@ -50,5 +50,20 @@
     <button mat-button (click)="submit()">
       Submit
     </button>
+    <mat-spinner
+      *ngIf="registrationPending()"
+      [diameter]="20"
+      class="pending-spinner"
+    ></mat-spinner>
+    <mat-icon
+      *ngIf="registrationSuccess()"
+      svgIcon="done"
+      class="registration-state-icon"
+    ></mat-icon>
+    <mat-icon
+      *ngIf="registrationFailed()"
+      svgIcon="failed"
+      class="registration-state-icon"
+    ></mat-icon>
   </mat-dialog-actions>
 </form>

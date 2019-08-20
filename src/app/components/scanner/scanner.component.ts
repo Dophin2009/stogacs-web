@@ -7,7 +7,7 @@ import { ZXingScannerComponent } from "@zxing/ngx-scanner";
 import { IAuthToken } from "../../models/auth.interface";
 import { ISignInRequest, IUser } from "../../models/user.interface";
 import { SignInAction } from "../../store/actions/user.actions";
-import { selectAuth } from "../../store/selectors/auth.selectors";
+import { selectAuthToken } from "../../store/selectors/auth.selectors";
 import { selectUser } from "../../store/selectors/user.selectors";
 import { IAppState } from "../../store/state/app.state";
 
@@ -32,7 +32,7 @@ export class ScannerComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this._store.select(selectAuth).subscribe(auth => {
+    this._store.select(selectAuthToken).subscribe(auth => {
       this.auth = auth;
     });
     this._store.select(selectUser).subscribe(user => {

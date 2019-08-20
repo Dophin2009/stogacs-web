@@ -2,17 +2,22 @@ import { HttpErrorResponse } from "@angular/common/http";
 import { Action } from "@ngrx/store";
 
 import {
-  IAuthToken, IBasicAuth, IRegistration, IRegistrationResponse
+  IAuthToken,
+  IBasicAuth,
+  IRegistration,
+  IRegistrationResponse
 } from "../../models/auth.interface";
 
 export enum EAuthActions {
   Login = "[Auth] Login",
   LoginSuccess = "[Auth] Login Success",
   LoginFailure = "[Auth] Login Failure",
+  ClearLoginStateNotifier = "[Auth] Clear Login State",
   Logout = "[Auth] Logout",
   Register = "[Auth] Register",
   RegisterSuccess = "[Auth] Register Success",
-  RegisterFailure = "[Auth] Register Failure"
+  RegisterFailure = "[Auth] Register Failure",
+  ClearRegistrationStateNotifier = "[Auth] Clear Registration State"
 }
 
 export class Login implements Action {
@@ -28,6 +33,11 @@ export class LoginSuccess implements Action {
 export class LoginFailure implements Action {
   type = EAuthActions.LoginFailure;
   constructor(public payload: HttpErrorResponse) {}
+}
+
+export class ClearLoginStateNotifier implements Action {
+  type = EAuthActions.ClearLoginStateNotifier;
+  constructor() {}
 }
 
 export class LogoutAction implements Action {
@@ -50,4 +60,18 @@ export class RegisterFailure implements Action {
   constructor(public payload: HttpErrorResponse) {}
 }
 
-export type AuthActions = Login | LoginSuccess | LoginFailure | Register | RegisterSuccess | RegisterFailure;
+export class ClearRegistrationStateAction implements Action {
+  type = EAuthActions.ClearRegistrationStateNotifier;
+  constructor() {}
+}
+
+export type AuthActions =
+  | Login
+  | LoginSuccess
+  | LoginFailure
+  | ClearLoginStateNotifier
+  | LogoutAction
+  | Register
+  | RegisterSuccess
+  | RegisterFailure
+  | ClearRegistrationStateAction;

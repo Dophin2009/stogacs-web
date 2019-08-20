@@ -11,7 +11,7 @@ import {
   ISignInSession,
   IUser
 } from "../models/user.interface";
-import { selectAuth } from "../store/selectors/auth.selectors";
+import { selectAuthToken } from "../store/selectors/auth.selectors";
 import { IAppState } from "../store/state/app.state";
 
 @Injectable({
@@ -26,7 +26,7 @@ export class UserService {
     private _store: Store<IAppState>,
     private _httpClient: HttpClient
   ) {
-    this._store.select(selectAuth).subscribe((auth: IAuthToken) => {
+    this._store.select(selectAuthToken).subscribe((auth: IAuthToken) => {
       this.auth = auth;
     });
   }

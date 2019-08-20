@@ -16,7 +16,9 @@ export function storageSyncReducer(
   reducer: ActionReducer<any>
 ): ActionReducer<any> {
   return storageSync<IAppState>({
-    features: [{ stateKey: "auth" }],
+    features: [
+      { stateKey: "auth", excludeKeys: ["registrationState", "loginState"] }
+    ],
     storage: window.localStorage
   })(reducer);
 }

@@ -24,5 +24,20 @@
     <button mat-button (click)="submit()">
       Submit
     </button>
+    <mat-spinner
+      *ngIf="loginPending()"
+      [diameter]="20"
+      class="pending-spinner"
+    ></mat-spinner>
+    <mat-icon
+      *ngIf="loginSuccess()"
+      svgIcon="done"
+      class="registration-state-icon"
+    ></mat-icon>
+    <mat-icon
+      *ngIf="loginFailure()"
+      svgIcon="failed"
+      class="registration-state-icon"
+    ></mat-icon>
   </mat-dialog-actions>
 </form>

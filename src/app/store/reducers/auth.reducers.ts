@@ -1,21 +1,44 @@
 import { IAuthToken } from "../../models/auth.interface";
-import { AuthActions, EAuthActions } from "../actions/auth.actions";
-import { IAuthState, initialAuthState } from "../state/auth.state";
+import {
+  AuthActions,
+  EAuthActions,
+  LoginSuccess
+} from "../actions/auth.actions";
+import {
+  IAuthState,
+  initialAuthState,
+  LoginStateNotifier,
+  RegistrationStateNotifier
+} from "../state/auth.state";
 
 export function authReducers(
   state: IAuthState = initialAuthState,
   action: AuthActions
 ): IAuthState {
   switch (action.type) {
+    case EAuthActions.Login: {
+      return {
+        ...state,
+        loginStateNotifier: LoginStateNotifier.PENDING
+      };
+    }
     case EAuthActions.LoginSuccess: {
       return {
         ...state,
-        token: action.payload as IAuthToken
+        token: (action as LoginSuccess).payload,
+        loginStateNotifier: LoginStateNotifier.SUCCESS
       };
     }
     case EAuthActions.LoginFailure: {
       return {
-        ...state
+        ...state,
+        loginStateNotifier: LoginStateNotifier.FAILURE
+      };
+    }
+    case EAuthActions.ClearLoginStateNotifier: {
+      return {
+        ...state,
+        loginStateNotifier: null
       };
     }
     case EAuthActions.Logout: {
@@ -24,14 +47,28 @@ export function authReducers(
         token: null
       };
     }
+    case EAuthActions.Register: {
+      return {
+        ...state,
+        registrationStateNotifier: RegistrationStateNotifier.PENDING
+      };
+    }
     case EAuthActions.RegisterSuccess: {
       return {
-        ...state
+        ...state,
+        registrationStateNotifier: RegistrationStateNotifier.SUCCESS
       };
     }
     case EAuthActions.RegisterFailure: {
       return {
-        ...state
+        ...state,
+        registrationStateNotifier: RegistrationStateNotifier.FAILURE
+      };
+    }
+    case EAuthActions.ClearRegistrationStateNotifier: {
+      return {
+        ...state,
+        registrationStateNotifier: null
       };
     }
     default: {
