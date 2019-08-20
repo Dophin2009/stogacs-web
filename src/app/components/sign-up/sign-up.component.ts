@@ -46,7 +46,7 @@ export class SignUpComponent implements OnInit {
 
     _iconRegistry.addSvgIcon(
       "failed",
-      _sanitizer.bypassSecurityTrustResourceUrl("asset/error.svg")
+      _sanitizer.bypassSecurityTrustResourceUrl("assets/error.svg")
     );
   }
 
