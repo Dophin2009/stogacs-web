@@ -22,8 +22,6 @@
 
 <br />
 
-<div *ngIf="authToken != null && user == null"></div>
-
 <div *ngIf="authToken != null && user != null">
   <app-user-info></app-user-info>
 </div>
@@ -31,6 +29,7 @@
 <mat-toolbar class="pin-bottom">
   <mat-toolbar-row>
     <mat-action-row>
+      <mat-spinner *ngIf="authToken != null && user == null" [diameter]="20" class="pending-spinner"></mat-spinner>
       <button
         mat-button
         matTooltip="Scan a session QR code"
