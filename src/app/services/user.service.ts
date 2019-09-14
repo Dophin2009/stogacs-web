@@ -64,7 +64,6 @@ export class UserService {
   }
 
   signIn(request: ISignInRequest): Observable<ISignInRequest> {
-    console.log(this.auth);
     const endpoint = `${this.BASE_URL}/signin`;
     const base64 = this.getAuthString();
 
