@@ -1,18 +1,14 @@
-import { Observable } from "rxjs";
-
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Store } from "@ngrx/store";
+import { Observable } from "rxjs";
 
 import { environment } from "../../environments/environment";
 import { IAuthToken } from "../models/auth.interface";
-import {
-  ISignInRequest,
-  ISignInSession,
-  IUser
-} from "../models/user.interface";
+import { IUser } from "../models/user.interface";
 import { selectAuthToken } from "../store/selectors/auth.selectors";
 import { IAppState } from "../store/state/app.state";
+import { ISignInRequest, ISignInSession } from '../models/meeting.interface';
 
 @Injectable({
   providedIn: "root"

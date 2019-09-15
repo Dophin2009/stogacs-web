@@ -3,21 +3,5 @@ export interface IUser {
   name: string;
   email: string;
   grade: number;
-}
-
-export interface ISignInRequest {
-  id: string;
-  userId: string;
-  time: string;
-  deviceInfo: string;
-  sessionId: string;
-  timecode: string;
-  success?: boolean;
-}
-
-export interface ISignInSession {
-  id: string;
-  startTime: string;
-  endTime: string;
-  meetingId: number;
+  roles: string[];
 }

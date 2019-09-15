@@ -1,8 +1,5 @@
-import {
-  ISignInRequest,
-  ISignInSession,
-  IUser
-} from "../../models/user.interface";
+import { IUser } from "../../models/user.interface";
+import { ISignInSession, ISignInRequest } from '../../models/meeting.interface';
 
 export interface IUserState {
   user: IUser;

@@ -3,8 +3,6 @@ import { MatDialog } from "@angular/material";
 import { Store } from "@ngrx/store";
 
 import {
-  ISignInRequest,
-  ISignInSession,
   IUser
 } from "../../models/user.interface";
 import {
@@ -18,6 +16,7 @@ import {
   selectUser
 } from "../../store/selectors/user.selectors";
 import { IAppState } from "../../store/state/app.state";
+import { ISignInRequest, ISignInSession } from 'src/app/models/meeting.interface';
 
 @Component({
   selector: "app-user-info",

@@ -1,16 +1,12 @@
-import { of } from "rxjs";
-import { catchError, map, mergeMap, switchMap, take } from "rxjs/operators";
-
 import { HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { Actions, Effect, ofType } from "@ngrx/effects";
+import { of } from "rxjs";
+import { catchError, map, mergeMap, switchMap, take } from "rxjs/operators";
 
-import {
-  ISignInRequest,
-  ISignInSession,
-  IUser
-} from "../../models/user.interface";
+import { ISignInRequest, ISignInSession } from "../../models/meeting.interface";
+import { IUser } from "../../models/user.interface";
 import { UserService } from "../../services/user.service";
 import { LogoutAction } from "../actions/auth.actions";
 import {

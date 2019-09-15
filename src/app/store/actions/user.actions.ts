@@ -1,11 +1,8 @@
 import { HttpErrorResponse } from "@angular/common/http";
 import { Action } from "@ngrx/store";
 
-import {
-  ISignInRequest,
-  ISignInSession,
-  IUser
-} from "../../models/user.interface";
+import { IUser } from "../../models/user.interface";
+import { ISignInRequest, ISignInSession } from 'src/app/models/meeting.interface';
 
 export enum EUserActions {
   GetUser = "[User] Get User",

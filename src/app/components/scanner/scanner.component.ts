@@ -5,11 +5,12 @@ import { BarcodeFormat } from "@zxing/library/esm5";
 import { ZXingScannerComponent } from "@zxing/ngx-scanner";
 
 import { IAuthToken } from "../../models/auth.interface";
-import { ISignInRequest, IUser } from "../../models/user.interface";
+import { IUser } from "../../models/user.interface";
 import { SignInAction } from "../../store/actions/user.actions";
 import { selectAuthToken } from "../../store/selectors/auth.selectors";
 import { selectUser } from "../../store/selectors/user.selectors";
 import { IAppState } from "../../store/state/app.state";
+import { ISignInRequest } from 'src/app/models/meeting.interface';
 
 @Component({
   selector: "app-scanner",
