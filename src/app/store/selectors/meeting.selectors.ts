@@ -21,7 +21,7 @@ export const selectMeetingSessions = createSelector(
   (state: IMeetingState) => state.meetingSessions
 );
 
-export const selectCurrentSessions = createSelector(
+export const selectCurrentSession = createSelector(
   selectMeetingState,
   (state: IMeetingState) => state.currentSession
 );

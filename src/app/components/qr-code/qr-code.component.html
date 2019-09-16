@@ -1,0 +1,15 @@
+<form [formGroup]="form">
+    <div *ngIf="currentSignInSession && currentSignInSession.sessionCodes ">
+  <mat-form-field>
+    <mat-label>Please select a QR Code:</mat-label>
+    <mat-select formControlName="qrCode">
+      <mat-option *ngFor="let code of currentSignInSession.sessionCodes" [value]="code">
+        {{code.code}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  </div>
+  
+  <button mat-butto (click)="cycleQrCode()">Cycle</button>
+  
+  </form>

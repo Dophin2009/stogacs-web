@@ -1,6 +1,6 @@
 
 <form [formGroup]="form">
-  <div>
+  <div *ngIf="meetings && meetings.length>0">
 <mat-form-field>
   <mat-label>Please select a meeting:</mat-label>
   <mat-select formControlName="meeting">
@@ -22,6 +22,6 @@
 </mat-form-field>
 </div>
 
-<button mat-butto>Show QR Code</button>
+<button mat-butto (click)="openShowBarCode()">Show QR Code</button>
 
 </form>

@@ -38,7 +38,7 @@ import { UserEffects } from "./store/effects/user.effects";
 import { appReducers, storageSyncReducer } from "./store/reducers/app.reducers";
 import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
 import { MeetingsEffects } from './store/effects';
-
+import { QrCodeComponent } from './components/qr-code/qr-code.component';
 const metaReducers: Array<MetaReducer<any, any>> = [storageSyncReducer];
 
 @NgModule({
@@ -49,7 +49,8 @@ const metaReducers: Array<MetaReducer<any, any>> = [storageSyncReducer];
     SignUpComponent,
     ScannerComponent,
     UserInfoComponent,
-    AdminDashboardComponent
+    AdminDashboardComponent,
+    QrCodeComponent
   ],
   imports: [
     AppRoutingModule,

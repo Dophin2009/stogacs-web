@@ -6,6 +6,8 @@ import { IAppState } from 'src/app/store/state';
 import { UpdateCurrentMeetingRequestAction, UpdateCurrentSessionRequestAction, GetMeetingSessionsRequestAction } from 'src/app/store/actions';
 import { selectMeetingSessions, selectCurrentMeeting, selectCurrentSignInSession } from 'src/app/store/selectors';
 import { single } from 'rxjs/operators';
+import { MatDialog } from "@angular/material/dialog";
+import { QrCodeComponent } from "../qr-code/qr-code.component";
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -24,7 +26,7 @@ export class AdminDashboardComponent implements OnInit {
 
   currentSignInSession: ISignInSession;
   
-  constructor(  private _fb: FormBuilder, private _store: Store<IAppState> ) { }
+  constructor(  private _fb: FormBuilder, private _store: Store<IAppState>, private dialog: MatDialog ) { }
 
   ngOnInit() {
     this.form = this._fb.group({
@@ -55,4 +57,16 @@ export class AdminDashboardComponent implements OnInit {
 
   }
 
+
+  openShowBarCode() {
+    this.dialog.open(QrCodeComponent, {
+      height: "80%",
+      minHeight: "500px",
+      maxHeight: "980px",
+      width: "80%",
+      minWidth: "500px",
+      maxWidth: "980px",
+      autoFocus: true
+    });
+  }
 }
