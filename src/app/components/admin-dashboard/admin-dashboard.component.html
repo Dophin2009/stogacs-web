@@ -1,0 +1,27 @@
+
+<form [formGroup]="form">
+  <div>
+<mat-form-field>
+  <mat-label>Please select a meeting:</mat-label>
+  <mat-select formControlName="meeting">
+    <mat-option *ngFor="let meeting of meetings" [value]="meeting">
+      {{meeting.date}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+</div>
+
+<div *ngIf="currentMeetingSesions && currentMeetingSesions.length>0">
+<mat-form-field>
+  <mat-label>Please select a session:</mat-label>
+  <mat-select formControlName="session">
+    <mat-option *ngFor="let session of currentMeetingSesions" [value]="session">
+      {{session.startTime}} - {{session.endTime}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+</div>
+
+<button mat-butto>Show QR Code</button>
+
+</form>

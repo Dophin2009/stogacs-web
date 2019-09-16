@@ -2,7 +2,7 @@ export interface IMeeting {
   id: number;
   date: string;
   val: number;
-  signInSessionIds: number;
+  signInSessionIds: string[];
 }
 
 export interface ISignInRequest {
@@ -23,7 +23,7 @@ export interface ISignInSession {
   sessionCodes: ISignInSessionCode[];
   codeRefresh: number;
   codeRefreshOffset: number;
-  signInRequestIds: ISignInRequest[];
+  signInRequestIds: string[];
 }
 
 export interface ISignInSessionCode {

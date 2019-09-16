@@ -4,7 +4,7 @@
 
 export const environment = {
   production: true,
-  serviceHost: "https://192.168.19.22:4201"
+  serviceHost: "https://192.168.19.23:4201"
 };
 
 /*

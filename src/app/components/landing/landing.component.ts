@@ -15,6 +15,9 @@ import { IAppState } from "../../store/state/app.state";
 import { LoginComponent } from "../login/login.component";
 import { ScannerComponent } from "../scanner/scanner.component";
 import { SignUpComponent } from "../sign-up/sign-up.component";
+import { GetMeetingsRequestAction } from 'src/app/store/actions';
+import { IMeeting } from 'src/app/models/meeting.interface';
+import { selectMeetings, selectCurrentMeeting } from 'src/app/store/selectors';
 
 @Component({
   selector: "app-landing",
@@ -24,6 +27,8 @@ import { SignUpComponent } from "../sign-up/sign-up.component";
 export class LandingComponent implements OnInit {
   authToken: IAuthToken;
   user: IUser;
+  meetings:IMeeting[];
+  currentMeeting: IMeeting;
 
   constructor(private _store: Store<IAppState>, private dialog: MatDialog) {}
 
@@ -33,12 +38,22 @@ export class LandingComponent implements OnInit {
 
       if (this.authToken != null) {
         this._store.dispatch(new GetUserAction());
+        this._store.dispatch(new GetMeetingsRequestAction());
       }
     });
 
     this._store.select(selectUser).subscribe(user => {
       this.user = user;
     });
+
+    this._store.select(selectMeetings).subscribe(data => {
+      this.meetings = data;
+    });
+
+    this._store.select(selectCurrentMeeting).subscribe(data => {
+      this.currentMeeting = data;
+    });
+
   }
 
   reload() {
