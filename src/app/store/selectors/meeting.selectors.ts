@@ -26,6 +26,16 @@ export const selectCurrentSession = createSelector(
   (state: IMeetingState) => state.currentSession
 );
 
+export const selectCurrentQrCode = createSelector(
+  selectMeetingState,
+  (state: IMeetingState) => state.currentQrCode
+);
+
+export const selectCurrentQrCodeImage = createSelector(
+  selectMeetingState,
+  (state: IMeetingState) => state.currentQrCodeImage
+);
+
 export const selectMeetingError = createSelector(
   selectMeetingState,
   (state: IMeetingState) => state.error

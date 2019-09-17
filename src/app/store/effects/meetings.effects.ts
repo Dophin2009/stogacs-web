@@ -63,6 +63,7 @@ export class MeetingsEffects {
         catchError(error => of(new GetMeetingSessionFailureAction(error)))
       );
     })
+
   );
 
 }

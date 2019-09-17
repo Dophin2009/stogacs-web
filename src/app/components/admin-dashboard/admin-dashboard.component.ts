@@ -24,7 +24,7 @@ export class AdminDashboardComponent implements OnInit {
 
   currentMeetingSesions: ISignInSession[];
 
-  currentSignInSession: ISignInSession;
+  currentSignInSession: ISignInSession = null;
   
   constructor(  private _fb: FormBuilder, private _store: Store<IAppState>, private dialog: MatDialog ) { }
 
@@ -52,6 +52,7 @@ export class AdminDashboardComponent implements OnInit {
     });
 
     this._store.select(selectCurrentSignInSession).subscribe(signInSession => {
+      console.log("signInSession:" + signInSession);
       this.currentSignInSession = signInSession;
     });
 
@@ -62,11 +63,15 @@ export class AdminDashboardComponent implements OnInit {
     this.dialog.open(QrCodeComponent, {
       height: "80%",
       minHeight: "500px",
-      maxHeight: "980px",
+      maxHeight: "700px",
       width: "80%",
       minWidth: "500px",
-      maxWidth: "980px",
+      maxWidth: "650px",
       autoFocus: true
     });
+  }
+
+  disableShowQrCode() {
+    return this.currentSignInSession === null;
   }
 }

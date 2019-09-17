@@ -24,8 +24,18 @@ export enum EMeetingsActions {
   UpdateCurrentSessionRequest = "[Meetings] Update Current Session Request",
   UpdateCurrentSessionSuccess = "[Meetings] Update Current Session Success",
   UpdateCurrentSessionFailure = "[Meetings] Update Current Session Failure",
-
+ 
+    // Update current QR code
+    UpdateSessionQrCodeRequest = "[Meetings] Update Session QR Code Request",
+    UpdateSessionQrCodeSuccess = "[Meetings] Update Session QR Code Success",
+    UpdateSessionQrCodeFailure = "[Meetings] Update Session QR Code Failure",
+  
+    // Get session QR Code Image
+    GetSessionsQrCodeImageRequest = "[Meetings] Get Sessions QR Code Image Request",
+    GetSessionsQrCodeImageSuccess = "[Meetings] Get Sessions QR Code Image Success",
+    GetSessionsQrCodeImageFailure = "[Meetings] Get Sessions QR Code Image Failure"
  }
+ 
 
 // Get meetings
 export class GetMeetingsRequestAction implements Action {
@@ -91,6 +101,38 @@ export class UpdateCurrentSessionFailureAction implements Action {
   constructor(public payload: HttpErrorResponse) {}
 }
 
+// update session QR code
+export class UpdateSessionQrCodeRequestAction implements Action {
+  type = EMeetingsActions.UpdateSessionQrCodeRequest;
+  constructor(public payload: string) {}
+}
+
+export class UpdateSessionQrCodeSuccessAction implements Action {
+  type = EMeetingsActions.UpdateSessionQrCodeSuccess;
+  constructor() {}
+}
+
+export class UpdateSessionQrCodeFailureAction implements Action {
+  type = EMeetingsActions.UpdateSessionQrCodeFailure;
+  constructor(public payload: HttpErrorResponse) {}
+}
+
+// Get session qr code
+export class GetSessionQrCodeImageRequestAction implements Action {
+  type = EMeetingsActions.GetSessionsQrCodeImageRequest;
+  constructor(public payload: {sessionId: string, qrCode: string}) {}
+}
+
+export class GetSessionQrCodeImageSuccessAction implements Action {
+  type = EMeetingsActions.GetSessionsQrCodeImageSuccess;
+  constructor(public payload: Blob) {}
+}
+
+export class GetSessionQrCodeImageFailureAction implements Action {
+  type = EMeetingsActions.GetSessionsQrCodeImageFailure;
+  constructor(public payload: HttpErrorResponse) {}
+}
+
 export type MeetingsActions = 
 GetMeetingsRequestAction | 
 GetMeetingsSuccessAction | 
@@ -103,4 +145,10 @@ GetMeetingSessionsSuccessAction |
 GetMeetingSessionFailureAction |
 UpdateCurrentSessionRequestAction |
 UpdateCurrentSessionSuccessAction |
-UpdateCurrentSessionFailureAction;
+UpdateCurrentSessionFailureAction |
+UpdateSessionQrCodeRequestAction |
+UpdateSessionQrCodeSuccessAction |
+UpdateSessionQrCodeFailureAction |
+GetSessionQrCodeImageRequestAction |
+GetSessionQrCodeImageSuccessAction |
+GetSessionQrCodeImageFailureAction;

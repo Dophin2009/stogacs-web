@@ -7,7 +7,12 @@ import {
   UserActions
 } from "../actions/user.actions";
 import { initialUserState, IUserState } from "../state/user.state";
-import { MeetingsActions, EMeetingsActions, GetMeetingsSuccessAction, GetMeetingsFailureAction, GetMeetingSessionsSuccessAction, GetMeetingSessionFailureAction, UpdateCurrentMeetingSuccessAction, UpdateCurrentMeetingFailureAction, UpdateCurrentSessionSuccessAction, UpdateCurrentSessionFailureAction, UpdateCurrentMeetingRequestAction, UpdateCurrentSessionRequestAction } from '../actions';
+import { MeetingsActions, EMeetingsActions, GetMeetingsSuccessAction, 
+  GetMeetingsFailureAction, GetMeetingSessionsSuccessAction, 
+  GetMeetingSessionFailureAction, UpdateCurrentMeetingSuccessAction, UpdateCurrentMeetingFailureAction, 
+  UpdateCurrentSessionSuccessAction, UpdateCurrentSessionFailureAction, 
+  UpdateCurrentMeetingRequestAction, UpdateCurrentSessionRequestAction, 
+  UpdateSessionQrCodeRequestAction, GetSessionQrCodeImageSuccessAction, GetSessionQrCodeImageFailureAction } from '../actions';
 import { IMeetingState, initialMeetingState } from '../state';
 
 export function meetingsReducers(
@@ -67,6 +72,34 @@ export function meetingsReducers(
         error: (action as UpdateCurrentSessionFailureAction).payload
       };
     }
+    case EMeetingsActions.UpdateSessionQrCodeRequest: {
+      const qrCode = ((action as UpdateSessionQrCodeRequestAction).payload);
+      return {
+        ...state,
+       currentQrCode: qrCode     
+      };
+    }
+    case EMeetingsActions.UpdateCurrentSessionFailure: {
+      return {
+        ...state,
+        error: (action as UpdateCurrentSessionFailureAction).payload
+      };
+    }
+    case EMeetingsActions.GetSessionsQrCodeImageSuccess: {
+      const qrCodeImage = ((action as GetSessionQrCodeImageSuccessAction).payload);
+      console.log('blog image:' + qrCodeImage);
+      return {
+        ...state,
+        currentQrCodeImage: qrCodeImage        
+      };
+    }
+    case EMeetingsActions.GetSessionsQrCodeImageFailure: {
+      return {
+        ...state,
+        error: (action as GetSessionQrCodeImageFailureAction).payload
+      };
+    }
+
 
     default: {
       return state;

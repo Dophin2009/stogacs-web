@@ -7,6 +7,8 @@ export interface IMeetingState {
   currentMeeting: IMeeting;
   meetingSessions: ISignInSession[];
   currentSession: ISignInSession;
+  currentQrCode: string;
+  currentQrCodeImage: Blob;
 
   error: any
 }
@@ -16,5 +18,7 @@ export const initialMeetingState: IMeetingState = {
   currentMeeting: null,
   meetingSessions: null,
   currentSession: null,
+  currentQrCode: null,
+  currentQrCodeImage: null,
   error:null
 };

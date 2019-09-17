@@ -12,4 +12,9 @@
   
   <button mat-butto (click)="cycleQrCode()">Cycle</button>
   
+
+  <hr/>
+  <div *ngIf="currentQrCodeImageUrl">
+    <img id="myimage" [src]='currentQrCodeImageUrl'/>
+  </div>
   </form>
