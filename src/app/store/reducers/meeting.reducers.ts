@@ -12,7 +12,8 @@ import { MeetingsActions, EMeetingsActions, GetMeetingsSuccessAction,
   GetMeetingSessionFailureAction, UpdateCurrentMeetingSuccessAction, UpdateCurrentMeetingFailureAction, 
   UpdateCurrentSessionSuccessAction, UpdateCurrentSessionFailureAction, 
   UpdateCurrentMeetingRequestAction, UpdateCurrentSessionRequestAction, 
-  UpdateSessionQrCodeRequestAction, GetSessionQrCodeImageSuccessAction, GetSessionQrCodeImageFailureAction } from '../actions';
+  UpdateSessionQrCodeRequestAction, GetSessionQrCodeImageSuccessAction, 
+  GetSessionQrCodeImageFailureAction, RecycleSessionQrCodeSuccessAction, RecycleSessionQrCodeFailureAction } from '../actions';
 import { IMeetingState, initialMeetingState } from '../state';
 
 export function meetingsReducers(
@@ -99,7 +100,19 @@ export function meetingsReducers(
         error: (action as GetSessionQrCodeImageFailureAction).payload
       };
     }
-
+    case EMeetingsActions.RecyleSessionsQrCodeSuccess: {
+      const payload = (action as RecycleSessionQrCodeSuccessAction).payload;
+      return {
+        ...state,
+       cycleSessionCode: payload     
+      };
+    }
+    case EMeetingsActions.RecyleSessionsQrCodeFailure: {
+      return {
+        ...state,
+        error: (action as RecycleSessionQrCodeFailureAction).payload
+      };
+    }
 
     default: {
       return state;

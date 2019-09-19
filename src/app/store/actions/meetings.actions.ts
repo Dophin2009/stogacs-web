@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from "@angular/common/http";
 import { Action } from "@ngrx/store";
+import { ISignInSessionCode} from 'src/app/models/meeting.interface';
 
 import { IUser } from "../../models/user.interface";
 import { ISignInRequest, ISignInSession, IMeeting } from 'src/app/models/meeting.interface';
@@ -33,7 +34,13 @@ export enum EMeetingsActions {
     // Get session QR Code Image
     GetSessionsQrCodeImageRequest = "[Meetings] Get Sessions QR Code Image Request",
     GetSessionsQrCodeImageSuccess = "[Meetings] Get Sessions QR Code Image Success",
-    GetSessionsQrCodeImageFailure = "[Meetings] Get Sessions QR Code Image Failure"
+    GetSessionsQrCodeImageFailure = "[Meetings] Get Sessions QR Code Image Failure",
+
+    // recycle session QR Code Image
+    RecyleSessionsQrCodeRequest = "[Meetings] Recycle Sessions QR Code Request",
+    RecyleSessionsQrCodeSuccess = "[Meetings] Recycle Sessions QR Code Success",
+    RecyleSessionsQrCodeFailure = "[Meetings] Recycle Sessions QR Code Failure"
+
  }
  
 
@@ -117,7 +124,7 @@ export class UpdateSessionQrCodeFailureAction implements Action {
   constructor(public payload: HttpErrorResponse) {}
 }
 
-// Get session qr code
+// Get session qr code image
 export class GetSessionQrCodeImageRequestAction implements Action {
   type = EMeetingsActions.GetSessionsQrCodeImageRequest;
   constructor(public payload: {sessionId: string, qrCode: string}) {}
@@ -133,6 +140,21 @@ export class GetSessionQrCodeImageFailureAction implements Action {
   constructor(public payload: HttpErrorResponse) {}
 }
 
+// Recycle session qr code
+export class RecycleSessionQrCodeRequestAction implements Action {
+  type = EMeetingsActions.RecyleSessionsQrCodeRequest;
+  constructor(public payload: string) {}
+}
+
+export class RecycleSessionQrCodeSuccessAction implements Action {
+  type = EMeetingsActions.RecyleSessionsQrCodeSuccess;
+  constructor(public payload: ISignInSessionCode) {}
+}
+
+export class RecycleSessionQrCodeFailureAction implements Action {
+  type = EMeetingsActions.RecyleSessionsQrCodeFailure;
+  constructor(public payload: HttpErrorResponse) {}
+}
 export type MeetingsActions = 
 GetMeetingsRequestAction | 
 GetMeetingsSuccessAction | 
@@ -151,4 +173,7 @@ UpdateSessionQrCodeSuccessAction |
 UpdateSessionQrCodeFailureAction |
 GetSessionQrCodeImageRequestAction |
 GetSessionQrCodeImageSuccessAction |
-GetSessionQrCodeImageFailureAction;
+GetSessionQrCodeImageFailureAction |
+RecycleSessionQrCodeRequestAction |
+RecycleSessionQrCodeSuccessAction |
+RecycleSessionQrCodeFailureAction;

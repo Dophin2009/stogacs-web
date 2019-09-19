@@ -7,12 +7,13 @@ import { environment } from "../../environments/environment";
 import { IAuthToken } from "../models/auth.interface";
 import { selectAuthToken } from "../store/selectors/auth.selectors";
 import { IAppState } from "../store/state/app.state";
+import { ISignInSessionCode} from 'src/app/models/meeting.interface';
 
 @Injectable({
   providedIn: "root"
 })
 export class QrCodeService {
-  private readonly BASE_URL = environment.serviceHost + "/admin/qr";
+  private readonly BASE_URL = environment.serviceHost + "/admin";
 
   auth: IAuthToken;
 
@@ -25,13 +26,27 @@ export class QrCodeService {
     });
   }
 
-  getSessionQrCodeImage(sessionId: string, qrCode: string): Observable<Blob> {
-    const endpoint = `${this.BASE_URL}` + "/" + sessionId + ":" + qrCode;
-    console.log('in qrcode service, endpoint:' + endpoint);
-    return this.authorizedGetRequest(endpoint);
+  recycleSessionQrCode(sessionId: string): Observable<ISignInSessionCode> {
+    const endpoint = `${this.BASE_URL}` + "/signin/sessions/" + sessionId + "/code/current";
+    return this.authorizedGetRequest<ISignInSessionCode>(endpoint);
   }
 
-  private authorizedGetRequest(sendpoint: string) {
+  private authorizedGetRequest<T>(endpoint: string): Observable<T> {
+    const base64 = window.btoa(`${this.auth.email}:${this.auth.token}`);
+    return this._httpClient.get<T>(endpoint, {
+      headers: {
+        Authorization: `Basic ${base64}`
+      }
+    });
+  }
+
+  getSessionQrCodeImage(sessionId: string, qrCode: string): Observable<Blob> {
+    const endpoint = `${this.BASE_URL}` + "/qr/" + sessionId + ":" + qrCode;
+    console.log('in qrcode service, endpoint:' + endpoint);
+    return this.authorizedGetBlobRequest(endpoint);
+  }
+
+  private authorizedGetBlobRequest(sendpoint: string) {
     const base64 = window.btoa(`${this.auth.email}:${this.auth.token}`);
     return this._httpClient.get(sendpoint, {
       headers: {

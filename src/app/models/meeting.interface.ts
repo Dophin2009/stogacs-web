@@ -8,7 +8,7 @@ export interface IMeeting {
 export interface ISignInRequest {
   id: string;
   userId: string;
-  time: string;
+  time: number;
   deviceInfo: string;
   sessionId: string;
   timecode: string;
@@ -17,8 +17,8 @@ export interface ISignInRequest {
 
 export interface ISignInSession {
   id: string;
-  startTime: string;
-  endTime: string;
+  startTime: number;
+  endTime: number;
   meetingId: number;
   sessionCodes: ISignInSessionCode[];
   codeRefresh: number;
@@ -28,6 +28,7 @@ export interface ISignInSession {
 
 export interface ISignInSessionCode {
   code: string;
-  startTime: string;
-  endTime: string;
+  startTime: number;
+  endTime: number;
+  endsIn: number;
 }

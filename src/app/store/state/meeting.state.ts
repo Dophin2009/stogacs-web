@@ -1,5 +1,5 @@
 import { IUser } from "../../models/user.interface";
-import { ISignInSession, ISignInRequest, IMeeting } from '../../models/meeting.interface';
+import { ISignInSession, ISignInRequest, ISignInSessionCode, IMeeting } from '../../models/meeting.interface';
 import { HttpErrorResponse } from '@angular/common/http';
 
 export interface IMeetingState {
@@ -7,9 +7,9 @@ export interface IMeetingState {
   currentMeeting: IMeeting;
   meetingSessions: ISignInSession[];
   currentSession: ISignInSession;
-  currentQrCode: string;
+  currentQrCode: string;  
+  cycleSessionCode: ISignInSessionCode;
   currentQrCodeImage: Blob;
-
   error: any
 }
 
@@ -19,6 +19,7 @@ export const initialMeetingState: IMeetingState = {
   meetingSessions: null,
   currentSession: null,
   currentQrCode: null,
+  cycleSessionCode: null,
   currentQrCodeImage: null,
   error:null
 };

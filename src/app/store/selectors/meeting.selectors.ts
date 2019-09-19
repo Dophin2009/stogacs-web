@@ -31,6 +31,11 @@ export const selectCurrentQrCode = createSelector(
   (state: IMeetingState) => state.currentQrCode
 );
 
+export const selectCycleSessionCode = createSelector(
+  selectMeetingState,
+  (state: IMeetingState) => state.cycleSessionCode
+);
+
 export const selectCurrentQrCodeImage = createSelector(
   selectMeetingState,
   (state: IMeetingState) => state.currentQrCodeImage
