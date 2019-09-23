@@ -3,11 +3,17 @@ import {
   ISignInSession,
   ISignInSessionCode
 } from "src/app/models/meeting.interface";
-import { selectCurrentSession, selectMeetingError } from "src/app/store/selectors";
+import {
+  selectCurrentSession,
+  selectMeetingError
+} from "src/app/store/selectors";
 import { Store } from "@ngrx/store";
 import { IAppState } from "src/app/store/state";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
-import { RecycleSessionQrCodeRequestAction } from "src/app/store/actions";
+import {
+  RecycleSessionQrCodeRequestAction,
+  RecycleSessionQrCodeSuccessAction
+} from "src/app/store/actions";
 import {
   selectCurrentQrCode,
   selectCycleSessionCode,
@@ -43,9 +49,6 @@ export class QrCodeComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    //close timer if there is one opne
-    this.clearTimer();
-
     this.form = this._fb.group({
       qrCode: [null, Validators.required]
     });
@@ -92,17 +95,19 @@ export class QrCodeComponent implements OnInit, OnDestroy {
         this.clearTimer();
 
         // start timer
-        this.timerId = setInterval(
-          (signInSessionCode: ISignInSessionCode) => {
-            this._store.dispatch(
-              new RecycleSessionQrCodeRequestAction(
-                this.currentSignInSession.id
-              )
-            );
-          },
-          this.cycleSessionCode.endsIn * 1000,
-          this.cycleSessionCode
-        );
+        if (!this.timerId) {
+          this.timerId = setInterval(
+            (signInSessionCode: ISignInSessionCode) => {
+              this._store.dispatch(
+                new RecycleSessionQrCodeRequestAction(
+                  this.currentSignInSession.id
+                )
+              );
+            },
+            this.cycleSessionCode.endsIn * 1000,
+            this.cycleSessionCode
+          );
+        }
       }
     });
 
@@ -127,17 +132,20 @@ export class QrCodeComponent implements OnInit, OnDestroy {
       this.error = error;
       this.isRecycling = false;
     });
-
   }
 
   // start/stop qr code cycling.
   cyclingQrCode() {
-    this.clearTimer();
-
     if (!this.isRecycling) {
       this._store.dispatch(
         new RecycleSessionQrCodeRequestAction(this.currentSignInSession.id)
       );
+    } else {
+      this.clearTimer();
+      if (this.cycleSessionCode) {
+        this._store.dispatch(new RecycleSessionQrCodeSuccessAction(null));
+      }
+
     }
 
     // toggle recycling.
@@ -147,7 +155,7 @@ export class QrCodeComponent implements OnInit, OnDestroy {
   // get meeting error message
   getMeetingErrorMessage() {
     let message = null;
-    if(this.error) {
+    if (this.error) {
       return this.error.error.message;
     }
     return message;
@@ -157,7 +165,8 @@ export class QrCodeComponent implements OnInit, OnDestroy {
   clearTimer() {
     if (this.timerId) {
       clearInterval(this.timerId);
-   }
+      this.timerId = null;
+    }
   }
 
   // clear timer when component is destroyed.

@@ -1,28 +1,28 @@
 <form [formGroup]="form">
-    <div *ngIf="currentSignInSession && currentSignInSession.sessionCodes ">
-  <mat-form-field>
-    <mat-label>Please select a QR Code:</mat-label>
-    <mat-select formControlName="qrCode" [disabled]="isRecycling">
-      <mat-option *ngFor="let code of currentSignInSession.sessionCodes" [value]="code">
-        {{code.code}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
+  <div *ngIf="currentSignInSession && currentSignInSession.sessionCodes ">
+    <mat-form-field>
+      <mat-label>Please select a QR Code:</mat-label>
+      <mat-select formControlName="qrCode" [disabled]="isRecycling">
+        <mat-option *ngFor="let code of currentSignInSession.sessionCodes" [value]="code">
+          {{code.code}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
   </div>
-  
-  <button mat-butto (click)="cyclingQrCode()">
-    <span *ngIf="!isRecycling">Cycle</span>  
-    <span *ngIf="isRecycling">Stop</span>  
-  </button>
-  
 
-  <hr/>
+  <button mat-button (click)="cyclingQrCode()">
+    <span *ngIf="!isRecycling">Cycle</span>
+    <span *ngIf="isRecycling">Stop</span>
+  </button>
+
+
+  <hr />
   <div *ngIf="error" class="errorMessage">
     <div>QR code cycle error:</div>
     <div>{{error.error.message}}</div>
   </div>
 
-  <div *ngIf="!error && currentQrCodeImageUrl">
-    <img id="myimage" [src]='currentQrCodeImageUrl'/>
+  <div *ngIf="!error && currentQrCodeImageUrl" class="center">
+    <img id="myimage" class="center" [src]='currentQrCodeImageUrl' />
   </div>
-  </form>
+</form>
