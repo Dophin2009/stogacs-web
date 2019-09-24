@@ -58,7 +58,7 @@ export class UserInfoComponent implements OnInit {
     this._store.dispatch(new ClearCurrentSignInSessionAction());
   }
 
-  formatISODate(s: string): string {
-    return new Date(s + "Z").toLocaleString();
+  formatISODate(epoch: number): string {
+    return new Date(epoch * 1000).toLocaleDateString();
   }
 }
