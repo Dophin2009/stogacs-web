@@ -67,7 +67,7 @@ export class ScannerComponent implements OnInit {
     };
 
     this._store.dispatch(new SignInAction(signInRequest));
-    console.log("dispatched");
+    this._dialogRef.close();
   }
 
   setCamera(camera: MediaDeviceInfo) {
