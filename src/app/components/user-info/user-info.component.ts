@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Input } from "@angular/core";
 import { MatDialog } from "@angular/material";
 import { Store } from "@ngrx/store";
 
@@ -16,7 +16,7 @@ import {
   selectUser
 } from "../../store/selectors/user.selectors";
 import { IAppState } from "../../store/state/app.state";
-import { ISignInRequest, ISignInSession } from 'src/app/models/meeting.interface';
+import { ISignInRequest, ISignInSession, IMeeting } from 'src/app/models/meeting.interface';
 
 @Component({
   selector: "app-user-info",
@@ -24,17 +24,21 @@ import { ISignInRequest, ISignInSession } from 'src/app/models/meeting.interface
   styleUrls: ["./user-info.component.scss"]
 })
 export class UserInfoComponent implements OnInit {
+  @Input()
   user: IUser;
+
+  @Input()
+  meetings: IMeeting[];
+
+  @Input()
+  currentMeeting: IMeeting;
+
   signInRequests: ISignInRequest[];
   currentSignInSession: ISignInSession;
 
   constructor(private _store: Store<IAppState>) {}
 
   ngOnInit() {
-    this._store.select(selectUser).subscribe(user => {
-      this.user = user;
-    });
-
     this._store.select(selectSignInRequests).subscribe(signInRequests => {
       this.signInRequests = signInRequests;
     });
@@ -54,7 +58,7 @@ export class UserInfoComponent implements OnInit {
     this._store.dispatch(new ClearCurrentSignInSessionAction());
   }
 
-  formatISODate(s: string): string {
-    return new Date(s + "Z").toLocaleString();
+  formatISODate(epoch: number): string {
+    return new Date(epoch * 1000).toLocaleDateString();
   }
 }

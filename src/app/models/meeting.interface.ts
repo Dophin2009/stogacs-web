@@ -2,13 +2,13 @@ export interface IMeeting {
   id: number;
   date: string;
   val: number;
-  signInSessionIds: number;
+  signInSessionIds: string[];
 }
 
 export interface ISignInRequest {
   id: string;
   userId: string;
-  time: string;
+  time: number;
   deviceInfo: string;
   sessionId: string;
   timecode: string;
@@ -17,17 +17,18 @@ export interface ISignInRequest {
 
 export interface ISignInSession {
   id: string;
-  startTime: string;
-  endTime: string;
+  startTime: number;
+  endTime: number;
   meetingId: number;
   sessionCodes: ISignInSessionCode[];
   codeRefresh: number;
   codeRefreshOffset: number;
-  signInRequestIds: ISignInRequest[];
+  signInRequestIds: string[];
 }
 
 export interface ISignInSessionCode {
   code: string;
-  startTime: string;
-  endTime: string;
+  startTime: number;
+  endTime: number;
+  endsIn: number;
 }

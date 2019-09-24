@@ -60,14 +60,14 @@ export class ScannerComponent implements OnInit {
     const signInRequest: ISignInRequest = {
       id: "1",
       userId: this.user.id,
-      time: new Date().toISOString(),
+      time: 0,
       deviceInfo: "a",
       sessionId: sessionId,
       timecode: timecode
     };
 
     this._store.dispatch(new SignInAction(signInRequest));
-    console.log("dispatched");
+    this._dialogRef.close();
   }
 
   setCamera(camera: MediaDeviceInfo) {

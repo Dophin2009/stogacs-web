@@ -11,7 +11,10 @@ import {
   MatFormFieldModule,
   MatIconModule,
   MatInputModule,
+  MatGridListModule,
   MatProgressSpinnerModule,
+  MatSelectModule,
+  MatOptionModule,
   MatToolbarModule,
   MatTooltipModule
 } from "@angular/material";
@@ -34,7 +37,9 @@ import { UserInfoComponent } from "./components/user-info/user-info.component";
 import { AuthEffects } from "./store/effects/auth.effects";
 import { UserEffects } from "./store/effects/user.effects";
 import { appReducers, storageSyncReducer } from "./store/reducers/app.reducers";
-
+import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
+import { MeetingsEffects, QrCodeEffects } from './store/effects';
+import { QrCodeComponent } from './components/qr-code/qr-code.component';
 const metaReducers: Array<MetaReducer<any, any>> = [storageSyncReducer];
 
 @NgModule({
@@ -44,7 +49,9 @@ const metaReducers: Array<MetaReducer<any, any>> = [storageSyncReducer];
     LoginComponent,
     SignUpComponent,
     ScannerComponent,
-    UserInfoComponent
+    UserInfoComponent,
+    AdminDashboardComponent,
+    QrCodeComponent
   ],
   imports: [
     AppRoutingModule,
@@ -61,12 +68,15 @@ const metaReducers: Array<MetaReducer<any, any>> = [storageSyncReducer];
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
+    MatGridListModule,
     MatProgressSpinnerModule,
+    MatSelectModule,
+    MatOptionModule,
     MatToolbarModule,
     MatTooltipModule,
     ReactiveFormsModule,
     ZXingScannerModule,
-    EffectsModule.forRoot([AuthEffects, UserEffects]),
+    EffectsModule.forRoot([AuthEffects, UserEffects, MeetingsEffects, QrCodeEffects]),
     StoreModule.forRoot(appReducers, { metaReducers }),
     StoreDevtoolsModule.instrument({
       maxAge: 25,

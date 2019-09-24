@@ -52,6 +52,9 @@ export class LoginComponent implements OnInit {
       .select(selectLoginStateNotifier)
       .subscribe((loginStateNotifier: LoginStateNotifier) => {
         this.loginStateNotifier = loginStateNotifier;
+        if(this.loginSuccess()) {
+          this.close();
+        }
       });
 
     this.form = this._fb.group({

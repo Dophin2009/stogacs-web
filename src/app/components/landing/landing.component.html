@@ -11,7 +11,7 @@
         Sign up
       </button>
     </span>
-    <span *ngIf="authToken != null && user != null">
+    <span *ngIf="authToken != null">
       <button mat-button (click)="dispatchLogout()">
         Logout
       </button>
@@ -23,7 +23,7 @@
 <br />
 
 <div *ngIf="authToken != null && user != null">
-  <app-user-info></app-user-info>
+  <app-user-info [user]="user" [meetings]="meetings" [currentMeeting]="currentMeeting"></app-user-info>
 </div>
 
 <mat-toolbar class="pin-bottom">
