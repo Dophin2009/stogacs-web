@@ -7,20 +7,28 @@
   </mat-card-subtitle>
   <mat-card-content>
     <mat-divider></mat-divider>
-    <br/>
-    <h2>Manage Mettings</h2>
-    <app-admin-dashboard [meetings]="meetings"></app-admin-dashboard>
+    <br />
 
-    <mat-divider></mat-divider>
-    <br/>
+    <div *ngIf="user.roles.includes('ADMIN')">
+      <h2>Manage Meetings</h2>
+      <app-admin-dashboard [meetings]="meetings"></app-admin-dashboard>
+
+      <br />
+      <mat-divider></mat-divider>
+      <br />
+    </div>
+
     <h2>Sign-In Requests</h2>
     <div *ngIf="signInRequests.length === 0">
       None
     </div>
     <mat-accordion>
       <ng-template ngFor let-request [ngForOf]="signInRequests">
-        <mat-expansion-panel (opened)="getRequestSession(request.sessionId)" (closed)="clearCurrentSession()"
-          class="request-details">
+        <mat-expansion-panel
+          (opened)="getRequestSession(request.sessionId)"
+          (closed)="clearCurrentSession()"
+          class="request-details"
+        >
           <mat-expansion-panel-header>
             <mat-panel-title>
               {{ request.success ? "Successful" : "Failed" }},

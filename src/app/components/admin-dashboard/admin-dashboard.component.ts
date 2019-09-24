@@ -17,14 +17,14 @@ import { QrCodeComponent } from "../qr-code/qr-code.component";
 export class AdminDashboardComponent implements OnInit {
   form: FormGroup;
 
-  diabledQrCodeButton: boolean = true;
+  disabledQrCodeButton: boolean = true;
 
   @Input()
   meetings: IMeeting[];
 
   currentMeeting: IMeeting;
 
-  currentMeetingSesions: ISignInSession[];
+  currentMeetingSessions: ISignInSession[];
 
   currentSignInSession: ISignInSession = null;
   
@@ -43,7 +43,7 @@ export class AdminDashboardComponent implements OnInit {
 
     this.form.controls.session.valueChanges.subscribe((session: ISignInSession) => {
       this._store.dispatch(new UpdateCurrentSessionRequestAction(session));
-      this.diabledQrCodeButton = false;
+      this.disabledQrCodeButton = false;
     })
 
     this._store.select(selectCurrentMeeting).subscribe(meeting => {
@@ -51,7 +51,7 @@ export class AdminDashboardComponent implements OnInit {
     });
 
     this._store.select(selectMeetingSessions).subscribe(meetingSessions => {
-      this.currentMeetingSesions = meetingSessions;
+      this.currentMeetingSessions = meetingSessions;
     });
 
     this._store.select(selectCurrentSignInSession).subscribe(signInSession => {

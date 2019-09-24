@@ -11,7 +11,7 @@
         Sign up
       </button>
     </span>
-    <span *ngIf="authToken != null && user != null">
+    <span *ngIf="authToken != null">
       <button mat-button (click)="dispatchLogout()">
         Logout
       </button>

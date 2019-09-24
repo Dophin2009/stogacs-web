@@ -1,27 +1,34 @@
-
 <form [formGroup]="form">
-  <div *ngIf="meetings && meetings.length>0">
-<mat-form-field>
-  <mat-label>Please select a meeting:</mat-label>
-  <mat-select formControlName="meeting">
-    <mat-option *ngFor="let meeting of meetings" [value]="meeting">
-      {{meeting.date}}
-    </mat-option>
-  </mat-select>
-</mat-form-field>
-</div>
+  <div *ngIf="meetings && meetings.length > 0">
+    <mat-form-field>
+      <mat-label>Select a meeting</mat-label>
+      <mat-select formControlName="meeting">
+        <mat-option *ngFor="let meeting of meetings" [value]="meeting">
+          {{ meeting.date }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
 
-<div *ngIf="currentMeetingSesions && currentMeetingSesions.length>0">
-<mat-form-field>
-  <mat-label>Please select a session:</mat-label>
-  <mat-select formControlName="session">
-    <mat-option *ngFor="let session of currentMeetingSesions" [value]="session">
-      {{session.startTime}} - {{session.endTime}}
-    </mat-option>
-  </mat-select>
-</mat-form-field>
-</div>
+  <div *ngIf="currentMeetingSessions && currentMeetingSessions.length > 0">
+    <mat-form-field>
+      <mat-label>Select a session</mat-label>
+      <mat-select formControlName="session">
+        <mat-option
+          *ngFor="let session of currentMeetingSessions"
+          [value]="session"
+        >
+          {{ session.startTime }} - {{ session.endTime }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
 
-<button mat-button [disabled]="diabledQrCodeButton" (click)="openShowBarCode()">Show QR Code</button>
-
+  <button
+    mat-button
+    [disabled]="disabledQrCodeButton"
+    (click)="openShowBarCode()"
+  >
+    Show QR Code
+  </button>
 </form>
